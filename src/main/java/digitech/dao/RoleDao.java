@@ -6,19 +6,21 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
+@Transactional
 public class RoleDao {
     @Autowired
     private HibernateTemplate hibernateTemplate;
 
-
+    @Transactional
     public void save(Role role){
         this.hibernateTemplate.save(role);
     }
-
+    @Transactional
     public void delete(Long id){
         Role role =  this.hibernateTemplate.get(Role.class,id);
         this.hibernateTemplate.delete(role);

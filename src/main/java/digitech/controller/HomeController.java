@@ -1,23 +1,65 @@
 package digitech.controller;
 
+import digitech.dao.RoleDao;
+import digitech.dto.UserDto;
+import digitech.model.Role;
 import digitech.model.Student;
+import digitech.model.User;
 import digitech.service.StudentService;
+import digitech.service.impl.UserServiceImpl;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
 	@Autowired
 	private StudentService ss;
+	@Autowired
+	private RoleDao roleDao;
 
+	@Autowired
+	private UserServiceImpl userService;
+
+	@PostConstruct
+	public String init(Model model) {
+		System.out.println("index");
+
+		return "index";
+	}
+
+	@GetMapping("/init")
+	public void initialize(){
+		Role adminRole=Role.builder()
+				.roleName("ADMIN")
+				.build();
+		Role employeeRole=Role.builder()
+				.roleName("EMPLOYEE")
+				.build();
+		Role userRole=Role.builder()
+				.roleName("USER")
+				.build();
+
+		roleDao.save(adminRole);
+		roleDao.save(employeeRole);
+		roleDao.save(userRole);
+		System.out.println("Role saved");
+	}
+
+
+	@RequestMapping("/testform")
+	public String test(Model model) {
+		System.out.println("form-test");
+
+		return "service_form";
+	}
 	@RequestMapping("/")
 	public String home(Model model) {
-		model.addAttribute("name","Piyal Ahmed");
-		Student student = new Student();
-		student.setName("test 2");
-		ss.add(student);
 		System.out.println("index");
 
 		return "index";
@@ -62,4 +104,6 @@ public class HomeController {
 		System.out.println("trainings");
 		return "trainings";
 	}
+
+
 }

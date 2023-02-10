@@ -13,7 +13,7 @@ public class StudentDao {
     @Autowired
     private HibernateTemplate hibernateTemplate;
 
-    @Transactional
+
     public void add(Student student){
         this.hibernateTemplate.save(student);
     }

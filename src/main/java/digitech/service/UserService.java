@@ -13,8 +13,8 @@ public interface UserService {
     public User register(User user);
     public void enroll(Long userId, Long eventId);
     public List<User> getUsers();
-    public User createUser();
-    public User updateUser();
+    public User createUser(User user);
+    public User updateUser(User user);
 
 }
 

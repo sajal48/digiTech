@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class AdminServiceImpl  implements AdminService {
+public class AdminServiceImpl implements AdminService {
     @Autowired
     private TaskDao taskDao;
     @Autowired
@@ -30,8 +30,8 @@ public class AdminServiceImpl  implements AdminService {
     public void assignTask(List<User> users, Long taskId) {
         Task task = taskDao.get(taskId);
         Set<User> userSet = new HashSet<>();
-        users.stream().map((user)->userSet.add(user));
-        task.builder().assignTo(userSet).build();
+        users.stream().map((user) -> userSet.add(user));
+        task.setAssignTo(userSet);
         taskDao.save(task);
 
     }
@@ -43,7 +43,7 @@ public class AdminServiceImpl  implements AdminService {
 
     @Override
     public void postEvent() {
-    //TODO
+        //TODO
     }
 
     @Override
@@ -54,7 +54,8 @@ public class AdminServiceImpl  implements AdminService {
     @Override
     public void updateEvent(Event e) {
         Event event = eventDao.get(e.getId());
-        event.builder().name(e.getName()).date(e.getDate()).registrations(e.getRegistrations()).build();
+        event.setName(e.getName());
+        event.setDate(e.getDate());
         eventDao.save(event);
     }
 
@@ -63,7 +64,6 @@ public class AdminServiceImpl  implements AdminService {
         List<User> users = userDao.getAll();
         List<User> users1 = new ArrayList<>();
         users1 = users.stream().filter((user -> user.getRole().getRoleName().equals("USER"))).collect(Collectors.toList());
-        return  users1;
-
+        return users1;
     }
 }

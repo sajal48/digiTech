@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void markDone(Long taskId, boolean status) {
         Task task = taskDao.get(taskId);
-        task.builder().status(status).build();
+        task.setStatus(status);
         taskDao.save(task);
     }
 
@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<User> getEmployees() {
         List<User> users = userDao.getAll();
         List<User> employee = users.stream().filter((user -> user.getRole().getRoleName().equals("EMPLOYEE"))).collect(Collectors.toList());
-        return  employee;
+        return employee;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Role employeeRole = roles.stream().filter(role -> "EMPLOYEE".equals(role.getRoleName()))
                 .findAny()
                 .orElse(null);
-        user.builder().role(employeeRole).build();
+        user.setRole(employeeRole);
         userDao.save(user);
         return user;
 
@@ -71,12 +71,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public User updateEmployee(User user) {
         User updatedUser = userDao.get(user.getId());
-        updatedUser.builder()
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .tasks(user.getTasks())
-                .build();
+        updatedUser.setPassword(user.getPassword());
+        updatedUser.setName(user.getName());
         userDao.save(updatedUser);
-        return  updatedUser;
+        return updatedUser;
     }
 }

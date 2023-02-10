@@ -57,47 +57,22 @@
   <!-- Start the Layout section -->
   <main>
 
-        
-        <form style="margin: auto" class="w-50">
-            <h2> <u> <b> Schedule A Call</b></u></h2> <br><br> <br>
-            <h5>First Name</h5>
-            <input class="form-control" type="text" placeholder="First Name" aria-label="default input example">
-            <br>
-            <h5>Last Name</h5>
-            <input class="form-control" type="text" placeholder="Last Name" aria-label="default input example">
-            <br>
-            
-            
-            <h5>Service</h5>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option selected>Select your Service</option>
-                <option value="Organic SEO">Organic SEO</option>
-                <option value="Local SEO">Local SEO</option>
-                <option value="Social Media Management">Social Media Management</option>
-                <option value="Website Design">Website Design</option>
-            </select>
-            <br><br>
 
-            <h5>Mobile Number</h5>
-            <input class="form-control" type="number" placeholder="Mobile number" aria-label="default input example">
-            <div class="mb-3"> <br>
-                <h5>Email Adress</h5>
-                
-                <input type="email" class="form-control" id="email" placeholder="name@example.com">
-            </div>
-            <h5>Current Website URL</h5>
-            <input type="url" class="form-control" id="website" placeholder="https://digitech.com/">
-            <br><br>
-            <button type="button" class="btn btn-danger">Submit</button>
+        <form method="post" style="margin: auto" class="w-50" action="/admin/user">
+            <input type="email" class="form-control" id="email" placeholder="email" name="email" >
+            <input type="text" class="form-control" id="name" placeholder="name" name="name">
+            <input type="text" class="form-control" id="password" placeholder="password" name="password">
+
+            <button type="submit" class="btn btn-danger">Submit</button>
             <br><br>
         </form>
-        
-        
+
+
       <p style=" text-align: center; font-size: 20pt;font-family:verdana;"><em> We will contact you as soon as possible.Kindly make sure to check emails.</em></p>
-        
-    
+
+
   </main>
-    
+
 <!-- End the Layout section -->
 
 
