@@ -39,18 +39,18 @@
 		</button>
 
 		<div style="margin-left: 180px;" class="collapse navbar-collapse"
-			id="navbarNavAltMarkup">
+			 id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 
 				<a style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-					class="nav-item nav-link active" href="#">About us <span
-					class="sr-only">(current)</span></a> <a
+				   class="nav-item nav-link active" href="/about">About us</a> <a
 					style="font-size: x-large; font-weight: 600; margin-left: 30px; color: aliceblue; text-decoration: underline;"
-					class="nav-item nav-link active" href="#">Our services</a> <a
+					class="nav-item nav-link active" href="/services">Our services</a><span
+					class="sr-only">(current)</span> <a
 					style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-					class="nav-item nav-link active" href="#">Training</a> <a
+					class="nav-item nav-link active" href="/trainings">Training</a> <a
 					style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-					class="nav-item nav-link active" href="#">Events</a> <a
+					class="nav-item nav-link active" href="/events">Events</a> <a
 					style="font-size: x-large; font-weight: 600; margin-left: 30px;"
 					class="nav-item nav-link active" href="#">Privacy Policy</a>
 			</div>
@@ -118,7 +118,7 @@
 							plumbers. We place you on the first page of Google so that they
 							can always find you. <br> We help you rank at the top of
 							search engines to get more visibility every time someone searches
-							for your business related topics. </em></b>
+							for your business related topics. </b></em>
 				</p>
 			</div>
 		</div>
@@ -137,7 +137,7 @@
 							friendly, fast, responsive and it has to work as a salesperson
 							for your business. <br> <br> Our website package covers
 							it all. It also comes with free logo, domain and hosting so you
-							don’t have to spend extra. </em></b>
+							don’t have to spend extra. </b></em>
 				</p>
 			</div>
 
@@ -167,7 +167,7 @@
 							create the content, we optimise the content, we run ads to make
 							sure your audience sees your content.<br>we also offer the
 							secret Digitech Weapon to convert these audience into customers
-							for you. </em></b>
+							for you. </b></em>
 				</p>
 			</div>
 		</div>
@@ -194,9 +194,6 @@
 				your website,<br> and More Leads and phone calls
 			</p>
 		</div>
-
-
-
 
 		<div class="d-flex justify-content-center">
 

@@ -23,21 +23,22 @@
 			</div>
 
 
-			<div>
-				<ul class="navbar-nav mr-5 mt-lg-0 ml-2">
-					<li class="nav-item active fs-2"><a
-						style="font-size: x-large;" class="nav-link font-weight-bold mr-4"
-						href="#">About Us</a></li>
-					<li class="nav-item active"><a style="font-size: x-large;"
-						class="nav-link font-weight-bold mr-4" href="#"> Our services</a></li>
-					<li class="nav-item active"><a style="font-size: x-large;"
-						class="nav-link font-weight-bold mr-4" href="#"> Training</a></li>
-					<li class="nav-item active"><a style="font-size: x-large;"
-						class="nav-link disabled font-weight-bold mr-4" href="#">Events</a></li>
-					<li class="nav-item active"><a style="font-size: x-large;"
-						class="nav-link disabled font-weight-bold mr-4" href="#">Privacy
-							Policy</a></li>
-				</ul>
+			<div style="margin-left: 180px;" class="collapse navbar-collapse"
+				 id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+
+					<a style="font-size: x-large; font-weight: 600; margin-left: 30px;"
+					   class="nav-item nav-link active" href="/about">About us <span
+							class="sr-only">(current)</span></a> <a
+						style="font-size: x-large; font-weight: 600; margin-left: 30px; color: aliceblue; text-decoration: underline;"
+						class="nav-item nav-link active" href="/services">Our services</a> <a
+						style="font-size: x-large; font-weight: 600; margin-left: 30px;"
+						class="nav-item nav-link active" href="/trainings">Training</a> <a
+						style="font-size: x-large; font-weight: 600; margin-left: 30px;"
+						class="nav-item nav-link active" href="/events">Events</a> <a
+						style="font-size: x-large; font-weight: 600; margin-left: 30px;"
+						class="nav-item nav-link active" href="#">Privacy Policy</a>
+				</div>
 			</div>
 		</div>
 	</nav>

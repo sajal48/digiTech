@@ -39,18 +39,18 @@
 		</button>
 
 		<div style="margin-left: 180px;" class="collapse navbar-collapse"
-			id="navbarNavAltMarkup">
+			 id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 
 				<a style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-					class="nav-item nav-link active" href="#">About us <span
-					class="sr-only">(current)</span></a> <a
+				   class="nav-item nav-link active" href="/about">About us</a> <a
 					style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-					class="nav-item nav-link active" href="#">Our services</a> <a
-					style="font-size: x-large; font-weight: 600; text-decoration: underline;; margin-left: 30px; color: aliceblue;"
-					class="nav-item nav-link active" href="#">Training</a> <a
+					class="nav-item nav-link active" href="/services">Our services</a> <a
+					style="font-size: x-large; font-weight: 600; margin-left: 30px; color: aliceblue; text-decoration: underline;"
+					class="nav-item nav-link active" href="/trainings">Training</a><span
+					class="sr-only">(current)</span> <a
 					style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-					class="nav-item nav-link active" href="#">Events</a> <a
+					class="nav-item nav-link active" href="/events">Events</a> <a
 					style="font-size: x-large; font-weight: 600; margin-left: 30px;"
 					class="nav-item nav-link active" href="#">Privacy Policy</a>
 			</div>
