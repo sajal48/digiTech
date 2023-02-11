@@ -21,6 +21,7 @@ public class Task {
     private String description;
     @ManyToMany(fetch = FetchType.EAGER ,mappedBy = "tasks")
     private Set<User> assignTo;
-    private boolean status;
+
+    private boolean status = false;
 
 }

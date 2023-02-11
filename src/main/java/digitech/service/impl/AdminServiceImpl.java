@@ -33,12 +33,16 @@ public class AdminServiceImpl implements AdminService {
         users.stream().map((user) -> userSet.add(user));
         task.setAssignTo(userSet);
         taskDao.save(task);
-
     }
 
     @Override
     public List<Task> getTasks() {
         return taskDao.getAll();
+    }
+
+    @Override
+    public void createTask(Task task) {
+        taskDao.save(task);
     }
 
     @Override

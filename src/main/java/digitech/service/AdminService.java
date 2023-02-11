@@ -10,6 +10,7 @@ public interface AdminService {
 
     public void assignTask(List<User> users, Long eventId);
     public List<Task> getTasks();
+    public void createTask(Task task);
 
     public void postEvent();
     public void createEvent(Event event);
