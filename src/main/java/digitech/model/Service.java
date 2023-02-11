@@ -12,12 +12,15 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Student {
+public class Service {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
+    private String description;
+    private Long cost;
+
 }

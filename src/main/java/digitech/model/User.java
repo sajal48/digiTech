@@ -33,7 +33,11 @@ public class User {
     private Set<Task> tasks ;
 
     @ManyToMany(fetch = FetchType.EAGER ,mappedBy = "registrations")
-    private Set<Event> registeredAt;
+    private Set<Event> registeredAtEvent;
 
+    @ManyToMany (fetch = FetchType.EAGER, mappedBy = "enrolledUser")
+    private Set<Training> enrolledAt;
 
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "serviceFor")
+    private Set<ServiceDetails> myServices;
 }

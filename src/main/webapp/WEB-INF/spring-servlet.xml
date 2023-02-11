@@ -48,7 +48,9 @@
         <!-- entities -->
         <property name="annotatedClasses">
             <list>
-                <value>digitech.model.Student</value>
+                <value>digitech.model.ServiceDetails</value>
+                <value>digitech.model.Service</value>
+                <value>digitech.model.Training</value>
                 <value>digitech.model.User</value>
                 <value>digitech.model.Role</value>
                 <value>digitech.model.Task</value>
