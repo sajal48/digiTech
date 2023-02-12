@@ -1,59 +1,85 @@
 <!DOCTYPE html>
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+    <title>Index page</title>
+    <%@ include file="header.jsp" %>
+    <style>
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            flex-basis: 20%;
+        }
+        .logo img{
+            height: 100px;
+            width: 100px;
+        }
+
+        .header-right {
+            flex-basis: 80%;
+            text-align: right;
+        }
+
+        .user-info {
+            margin-right: 20px;
+        }
+
+        .user-name {
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+    </style>
 </head>
 <main>
     <div class="v6_103">
-        <%--    <div class="v6_104"></div>--%>
-        <%--    <div class="v6_105"></div>--%>
-        <%--    <div class="v6_106"></div>--%>
-        <%--    <span class="v6_107">Who we are</span>--%>
-        <%--    <div class="v6_108"></div>--%>
-        <%--    <div class="name"></div>--%>
-        <%--    <span class="v6_110">SEO Training</span><span class="v6_111">Privacy Policy</span><span class="v6_112">Events</span><span--%>
-        <%--        class="v6_113">Henry Davidson</span>--%>
-        <%--    <div class="v6_114"></div>--%>
-        <%--    <span class="v6_115">Our service</span>--%>
-        <div class="d-flex justify-content-between">
-            <div>
-                <img src="images/logo.jpg" alt="logo" width="150px"
-                     class="img-thumbnail border-0 mb-0">
-            </div>
-
-            <div>
-                <img src="images/user.jpg" alt="logo" width="150px"
-                     class="img-thumbnail border-0 mb-0">
-                <p>Henrey Anderson</p>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-danger">
-            <a
-                    style="font-size: xx-large; color: white; font-weight: 600; margin-left: 30px;"
-                    class="navbar-brand" href="#">digiTech</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div style="margin-left: 180px;" class="collapse navbar-collapse"
-                 id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-
-                    <a style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-                       class="nav-item nav-link active" href="/about">About us</a> <a
-                        style="font-size: x-large; font-weight: 600; margin-left: 30px; color: aliceblue; text-decoration: underline;"
-                        class="nav-item nav-link active" href="/services">Our services</a><span
-                        class="sr-only">(current)</span> <a
-                        style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-                        class="nav-item nav-link active" href="/trainings">Training</a> <a
-                        style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-                        class="nav-item nav-link active" href="/events">Events</a> <a
-                        style="font-size: x-large; font-weight: 600; margin-left: 30px;"
-                        class="nav-item nav-link active" href="#">Privacy Policy</a>
-                </div>
-            </div>
-        </nav>
         <div>
             <main style="margin-left: auto; margin-right: auto; width: 80%;">
 

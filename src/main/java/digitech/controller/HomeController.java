@@ -1,17 +1,24 @@
 package digitech.controller;
 
 
+import digitech.dto.TrainingDto;
+import digitech.model.Event;
+import digitech.model.User;
+import digitech.service.AdminService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
 @Controller
 public class HomeController {
 
-
-
+	@Autowired
+	private AdminService adminService;
 //	@PostConstruct
 //	public String init(Model model) {
 //		System.out.println("index");
@@ -21,17 +28,26 @@ public class HomeController {
 
 
 
-
 	@RequestMapping("/testform")
 	public String test(Model model) {
 		System.out.println("form-test");
 
 		return "service_form";
 	}
+
 	@RequestMapping("/")
 	public String home(Model model) {
 		System.out.println("index");
 		return "index";
+	}
+	@GetMapping("/login")
+	String login(){
+		return "login";
+	}
+
+	@GetMapping("/signup")
+	String signup(){
+		return "signup";
 	}
 	@RequestMapping("/about")
 	public String about() {
@@ -48,10 +64,10 @@ public class HomeController {
 		System.out.println("services");
 		return "services";
 	}
-	@RequestMapping("/service-form")
+	@RequestMapping("/admin/user")
 	public String serviceForm() {
 		System.out.println("service_form");
-		return "service_form";
+		return "add_user";
 	}
 	@RequestMapping("/event-form")
 	public String eventForm() {

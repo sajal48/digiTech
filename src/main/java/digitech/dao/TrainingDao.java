@@ -1,6 +1,7 @@
 package digitech.dao;
 
 import digitech.model.Training;
+import digitech.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,11 @@ public class TrainingDao {
     public void delete(Long id){
         Training training =  this.hibernateTemplate.get(Training.class,id);
         this.hibernateTemplate.delete(training);
+    }
+
+    @Transactional
+    public void updateTraining(Training training) {
+        this.hibernateTemplate.update(training);
     }
 
 

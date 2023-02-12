@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,8 +21,10 @@ public class Event {
     private Long id;
     private String name;
     private String details;
+    private String location;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "registered_user",
             joinColumns = @JoinColumn(name = "event_id"),

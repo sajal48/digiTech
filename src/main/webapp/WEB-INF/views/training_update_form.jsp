@@ -65,25 +65,47 @@
 		<br>
 		<br> <br>
 
-		<form style="margin: auto" class="w-50" action="/admin/training" method="post">
+		<form style="margin: auto" class="w-50">
 			<h2>
 				<u> <b> Course Enrollment Form </b></u>
 			</h2>
 			<br> <br> <br>
 			<h5>Full Name</h5>
-			<input name="name" class="form-control" type="text" placeholder="Name"
+			<input class="form-control" type="text" placeholder="Full Name"
 				aria-label="default input example"> <br>
-			<h5>Description</h5>
-			<input name="description" class="form-control" type="text" placeholder="description"
+			<h5>Date of Birth</h5>
+			<input class="form-control" type="number" placeholder="DD/MM/YYY"
 				aria-label="default input example"> <br>
+			<h5>Courses</h5>
+			<br> <select class="form-select form-select-sm"
+				aria-label=".form-select-sm example">
+				<option selected>Choose Course</option>
+				<option value=" SEO">SEO</option>
+				<option value="BlockChain">BlockChain</option>
+				<option value="Social Media Management">Social Media
+					Management</option>
+				<option value="FreeCourses">Free courses</option>
+			</select>
+			<h5>Address</h5>
+			<div class="mb-3">
+				<label for="exampleFormControlTextarea1" class="form-label"></label>
+				<textarea class="form-control" id="exampleFormControlTextarea1"
+					rows="3"></textarea>
+			</div>
+			<br>
 
-
-			<h5>Cost</h5>
-			<input name="cost" class="form-control" type="number" placeholder="Cost"
+			<h5>Mobile Number</h5>
+			<input class="form-control" type="text" placeholder="Mobile number"
 				aria-label="default input example">
-
+			<div class="mb-3">
+				<br> <br>
+				<h5>Email Address</h5>
+				<label for="exampleFormControlInput1" class="form-label"></label> <input
+					type="email" class="form-control" id="exampleFormControlInput1"
+					placeholder="name@example.com">
+			</div>
 			<br> <br>
-			<button type="submit" class="btn btn-danger">Submit</button>
+			<button type="button" class="btn btn-danger">Submit</button>
 		</form>
 	</main>
 	<!-- End the Layout section -->
