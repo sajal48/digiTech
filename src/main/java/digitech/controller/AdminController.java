@@ -61,12 +61,7 @@ public class AdminController {
     String addEvent() {
         return "add_event";
     }
-    @PostMapping("/admin/add_service")
-    String courseUpdate(@RequestParam("id") Long id, Model model) {
-        Service service = adminService.getService(id);
-        model.addAttribute("event", service);
-        return "add_service";
-    }
+
 
     @GetMapping("admin/course")
     String addCourse() {

@@ -205,7 +205,7 @@
         <td>Service Description</td>
         <td>Service Cost</td>
                 <td>
-                    <form action="/admin/update_service" method="post" style="display: inline-block">
+                    <form action="/admin/add_service" method="post" style="display: inline-block">
                         <input type="hidden" name="id" value="<%= service.getId() %>">
                         <input type="hidden" name="name" value="<%= service.getName() %>">
                         <input type="hidden" name="description" value="<%= service.getDescription() %>">4
