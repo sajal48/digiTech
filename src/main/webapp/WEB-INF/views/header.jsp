@@ -16,7 +16,7 @@
       <li><a href="/services">Our Services</a></li>
       <li><a href="/trainings">Trainings</a></li>
       <li><a href="/events">Events</a></li>
-      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="/privacy_policy">Privacy Policy</a></li>
     </ul>
   </nav>
 </header>

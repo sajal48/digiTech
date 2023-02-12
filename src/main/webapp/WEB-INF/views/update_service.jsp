@@ -1,4 +1,5 @@
 <%@ page import="digitech.model.Training" %>
+<%@ page import="digitech.model.Service" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,23 +71,23 @@
 </header>
 
 <!-- Add the form -->
-<form action="/admin/update_training" method="post">
-<%--  <% Training training = (Training) request.getAttribute("training");%>--%>
-<%--  <input type="hidden" name="id" value="<%=training.getId()%>">--%>
+<form action="/admin/update_service" method="post">
+  <% Service service = (Service) request.getAttribute("service");%>
+  <input type="hidden" name="id" value="<%=service.getId()%>">
   <div>
     <label for="service_name">service Name:</label>
-    <input type="text" id="service_name" name="name" required>
-<%--    <input type="text" id="service_name" name="name" value="<%=training.getName() %>" required>--%>
+<%--    <input type="text" id="service_name" name="name" required>--%>
+    <input type="text" id="service_name" name="name" value="<%=service.getName() %>" required>
   </div>
   <div>
     <label for="service_description">service Description:</label>
-    <textarea id="service_description" name="description"></textarea>
-<%--    <textarea id="service_description" name="description"><%=training.getDescription() %></textarea>--%>
+<%--    <textarea id="service_description" name="description"></textarea>--%>
+    <textarea id="service_description" name="description"><%=service.getDescription() %></textarea>
   </div>
   <div>
     <label for="service_price">service Price:</label>
-    <input type="number" id="service_price" name="cost" required>
-<%--    <input type="number" id="service_price" name="cost" value="<%=training.getCost() %>" required>--%>
+<%--    <input type="number" id="service_price" name="cost" required>--%>
+    <input type="number" id="service_price" name="cost" value="<%=service.getCost() %>" required>
   </div>
   <button type="submit">Update service</button>
 </form>

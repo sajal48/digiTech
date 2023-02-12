@@ -164,6 +164,7 @@
     <!-- Add a row for each user -->
     <%
         List<User> users = (List<User>) request.getAttribute("users");
+        if(users!=null){
         for (User user : users) {
     %>
     <tr>
@@ -183,11 +184,12 @@
         </td>
     </tr>
     <%
+            }
         }
     %>
 </table>
 <h2 style="display: inline-block">Services</h2>
-<a href="admin/user" class="add-user-btn" style="float: right;">Add Service</a>
+<a href="/admin/add_service" class="add-user-btn" style="float: right;">Add Service</a>
 <table>
     <tr>
         <th>Name</th>
@@ -196,40 +198,30 @@
         <th>Action</th>
     </tr>
     <%
-        List<Service> services = (List<Service>) request.getAttribute("sevices");
+        List<Service> services = (List<Service>) request.getAttribute("services");
+        if(services!=null){
         for (Service service : services) {
     %>
-
     <tr>
-        <td>Service name</td>
-        <td>Service Description</td>
-        <td>Service Cost</td>
-                <td>
-                    <form action="/admin/add_service" method="post" style="display: inline-block">
-                        <input type="hidden" name="id" value="<%= service.getId() %>">
-                        <input type="hidden" name="name" value="<%= service.getName() %>">
-                        <input type="hidden" name="description" value="<%= service.getDescription() %>">4
-                        <input type="hidden" name="cost" value="<%= service.getCost() %>">
-                        <input class="button" type="submit" value="Edit">
-                        <!-- <a href="#" class="button">Delete</a> -->
-                    </form>
-                    <a href="/admin/delete_service/"<%= service.getId() %>" class="button">Delete</a>
-                </td>
+        <td><%= service.getName() %></td>
+        <td><%= service.getDescription() %></td>
+        <td><%= service.getCost() %></td>
         <td>
-            <form action="/admin/event/update" method="post" style="display: inline-block">
-                <%--            <input type="hidden" name="id" value="<%= event.getId() %>">--%>
-                <%--            <input type="hidden" name="date" value="<%= event.getDate() %>">--%>
-                <%--            <input type="hidden" name="details" value="<%= event.getDetails() %>">--%>
-                <%--            <input type="hidden" name="location" value="<%= event.getLocation() %>">--%>
+            <form action="/admin/service/update" method="post" style="display: inline-block">
+                <input type="hidden" name="id" value="<%= service.getId() %>">
+                <input type="hidden" name="name" value="<%= service.getName() %>">
+                <input type="hidden" name="description" value="<%= service.getDescription() %>">
+                <input type="hidden" name="cost" value="<%= service.getCost() %>">
                 <input class="button" type="submit" value="Edit">
                 <!-- <a href="#" class="button">Delete</a> -->
             </form>
-            <a href="/admin/event/delete/" class="button">Delete</a>
+        <a href="/admin/delete_service/<%= service.getId() %>" class="button">Delete</a>
         </td>
     </tr>
-    <%--    <%--%>
-    <%--        }--%>
-    <%--    %>--%>
+      <%
+            }
+        }
+      %>
 </table>
 <h2 style="display: inline-block">Events </h2>
 <a href="admin/event" class="add-user-btn" style="float: right;">Add event</a>
@@ -245,6 +237,7 @@
     <tr>
             <%
         List<Event> events = (List<Event>) request.getAttribute("events");
+        if(events!=null){
         for (Event event : events) {
     %>
     <tr>
@@ -264,6 +257,7 @@
     </td>
     </tr>
     <%
+            }
         }
     %>
 </table>
@@ -280,6 +274,7 @@
     <tr>
             <%
         List<Training> trainings = (List<Training>) request.getAttribute("trainings");
+        if(trainings!=null){
         for (Training training : trainings) {
     %>
     <tr>
@@ -295,9 +290,11 @@
                 <input class="button" type="submit" value="Edit">
                 <!-- <a href="#" class="button">Delete</a> -->
             </form>
+            <a href="/admin/course/delete/<%= training.getId() %>" class="button">Delete</a>
         </td>
     </tr>
     <%
+            }
         }
     %>
 </table>

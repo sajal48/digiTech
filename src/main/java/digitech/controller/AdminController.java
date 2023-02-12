@@ -57,6 +57,12 @@ public class AdminController {
         model.addAttribute("event", event);
         return "update_event";
     }
+    @PostMapping("/admin/service/update")
+    String editService(@RequestParam("id") Long id, Model model) {
+        Service service = adminService.getService(id);
+        model.addAttribute("service", service);
+        return "update_service";
+    }
     @GetMapping("admin/event")
     String addEvent() {
         return "add_event";
@@ -71,30 +77,30 @@ public class AdminController {
     // ----------------USER SECTION ------------------
 
     @PostMapping(value = "/admin/user")
-    RedirectView createUser(@ModelAttribute UserDto userDto) {
+    RedirectView createUser(@ModelAttribute UserDto userDto,Model model) {
         adminService.createUser(userDto);
         System.out.println(" User created " + userDto);
+        List<Event> events=adminService.getEvents();
+        List<Training> trainings = adminService.getTrainings();
+        List<Service> services = adminService.getServies();
+        List<User> users = adminService.getUsers();
+        model.addAttribute("trainings",trainings);
+        model.addAttribute("services",services);
+        model.addAttribute("users",users);
+        model.addAttribute("events",events);
         //TODO: change redirection
-        return new RedirectView("/testform");
+        return new RedirectView("/admin");
     }
     @PostMapping("/admin/update_user")
     public RedirectView updateUser(@ModelAttribute UserDto userDto,Model model) {
 //         Update the user in the database
         adminService.updateUser(userDto);
-        List<User> users = adminService.getUsers();
-        List<Event> events=adminService.getEvents();
-        model.addAttribute("users",users);
-        model.addAttribute("events",events);
         return new RedirectView("/admin");
     }
     @GetMapping("/admin/delete_user/{id}")
     public RedirectView deleteUser(@PathVariable long id,Model model) {
 //         Update the user in the database
         adminService.deleteUser(id);
-        List<User> users = adminService.getUsers();
-        List<Event> events=adminService.getEvents();
-        model.addAttribute("users",users);
-        model.addAttribute("events",events);
         return new RedirectView("/admin");
 
     }
@@ -134,23 +140,19 @@ public class AdminController {
     @PostMapping(value = "/admin/update_event")
     public RedirectView updateEvent(@ModelAttribute Event event,Model model) {
         adminService.updateEvent(event);
-        List<User> users = adminService.getUsers();
-        List<Event> events=adminService.getEvents();
-        model.addAttribute("users",users);
-        model.addAttribute("events",events);
         return new RedirectView("/admin");
     }
 
     @GetMapping("/admin/event/delete/{id}")
     public RedirectView deleteEvent(@PathVariable("id") long id,Model model) {
         adminService.deleteEvent(id);
-        List<User> users = adminService.getUsers();
-        List<Event> events=adminService.getEvents();
-        model.addAttribute("users",users);
-        model.addAttribute("events",events);
         return new RedirectView("/admin");
     }
-
+    @GetMapping("/admin/course/delete/{id}")
+    public RedirectView deleteCourse(@PathVariable("id") long id,Model model) {
+        adminService.deleteCourse(id);
+        return new RedirectView("/admin");
+    }
     @PostMapping(value = "/admin/event/register")
     void registerEvent(@RequestParam Long userId, @RequestParam Long eventId) {
         adminService.registerEvent(userId, eventId);
@@ -180,13 +182,6 @@ public class AdminController {
     @PostMapping(value = "/admin/update_training")
     public RedirectView updateTraining(@ModelAttribute Training training,Model model) {
         adminService.updateTraining(training);
-        List<User> users = adminService.getUsers();
-        List<Event> events=adminService.getEvents();
-        List<Training> trainings=adminService.getTrainings();
-        model.addAttribute("users",users);
-        model.addAttribute("events",events);
-        model.addAttribute("trainings",trainings);
-
         return new RedirectView("/admin");
     }
     @RequestMapping("admin/course/update")
@@ -205,7 +200,7 @@ public class AdminController {
         adminService.createService(serviceDto);
         System.out.println(" Service created " + serviceDto);
         //TODO: change redirection
-        return new RedirectView("/testform");
+        return new RedirectView("/admin");
     }
 
     @GetMapping("/admin/services")
@@ -221,7 +216,7 @@ public class AdminController {
         return new RedirectView("/admin");
     }
     @GetMapping("/admin/delete_service/{id}")
-    public RedirectView deleteService(@PathVariable long id,Model model) {
+    public RedirectView deleteService(@PathVariable long id) {
 //         Update the user in the database
         adminService.deleteService(id);
         return new RedirectView("/admin");

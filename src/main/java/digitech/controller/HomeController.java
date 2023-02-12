@@ -83,7 +83,6 @@ public class HomeController {
 		System.out.println("service_form");
 		return "add_service";
 	}
-
 	@RequestMapping("/event-form")
 	public String eventForm() {
 		System.out.println("event_form");
@@ -103,6 +102,12 @@ public class HomeController {
 	public String trainings() {
 		System.out.println("trainings");
 		return "trainings";
+	}
+
+	@RequestMapping("/privacy_policy")
+	public String privacyPolicy() {
+		System.out.println("trainings");
+		return "privacy_policy";
 	}
 
 

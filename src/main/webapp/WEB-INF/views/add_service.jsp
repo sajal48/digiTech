@@ -69,7 +69,7 @@
 </header>
 
 <!-- Add the form -->
-<form action="/admin/training" method="post">
+<form action="/admin/service" method="post">
   <div>
     <label for="service_name">Service Name:</label>
     <input type="text" id="service_name" name="name" required>

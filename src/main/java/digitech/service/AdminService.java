@@ -171,4 +171,7 @@ public class AdminService {
         serviceDao.delete(id);
     }
 
+    public void deleteCourse(long id) {
+        trainingDao.delete(id);
+    }
 }
