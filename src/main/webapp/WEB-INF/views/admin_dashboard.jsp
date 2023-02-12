@@ -104,6 +104,7 @@
             margin-bottom: 20px;
         }
     </style>
+    <title>Admin Dashboard</title>
 </head>
 <body>
 <!-- Add the header -->
@@ -184,7 +185,51 @@
         }
     %>
 </table>
-
+<h2 style="display: inline-block">Services</h2>
+<a href="admin/user" class="add-user-btn" style="float: right;">Add Service</a>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Cost</th>
+        <th>Action</th>
+    </tr>
+    <!-- Add a row for each user -->
+    <%--    <%--%>
+    <%--        List<User> users = (List<User>) request.getAttribute("users");--%>
+    <%--        for (User user : users) {--%>
+    <%--    %>--%>
+    <tr>
+        <td>Service name</td>
+        <td>Service Description</td>
+        <td>Service Cost</td>
+        <%--        <td>--%>
+        <%--            <form action="/admin/user/update" method="post" style="display: inline-block">--%>
+        <%--                <input type="hidden" name="id" value="<%= user.getId() %>">--%>
+        <%--                <input type="hidden" name="name" value="<%= user.getName() %>">--%>
+        <%--                <input type="hidden" name="email" value="<%= user.getEmail() %>">--%>
+        <%--                <input type="hidden" name="role" value="<%= user.getRole().getRoleName() %>">--%>
+        <%--                <input class="button" type="submit" value="Edit">--%>
+        <%--                <!-- <a href="#" class="button">Delete</a> -->--%>
+        <%--            </form>--%>
+        <%--            <a href="/admin/delete_user/<%= user.getId() %>" class="button">Delete</a>--%>
+        <%--        </td>--%>
+        <td>
+            <form action="/admin/event/update" method="post" style="display: inline-block">
+                <%--            <input type="hidden" name="id" value="<%= event.getId() %>">--%>
+                <%--            <input type="hidden" name="date" value="<%= event.getDate() %>">--%>
+                <%--            <input type="hidden" name="details" value="<%= event.getDetails() %>">--%>
+                <%--            <input type="hidden" name="location" value="<%= event.getLocation() %>">--%>
+                <input class="button" type="submit" value="Edit">
+                <!-- <a href="#" class="button">Delete</a> -->
+            </form>
+            <a href="/admin/event/delete/" class="button">Delete</a>
+        </td>
+    </tr>
+    <%--    <%--%>
+    <%--        }--%>
+    <%--    %>--%>
+</table>
 <h2 style="display: inline-block">Events </h2>
 <a href="admin/event" class="add-user-btn" style="float: right;">Add event</a>
 
