@@ -1,6 +1,8 @@
 package digitech.service;
 
 import digitech.dao.*;
+import digitech.dto.ServiceDto;
+
 import digitech.dto.TrainingDto;
 import digitech.dto.UserDto;
 import digitech.model.Event;
@@ -16,6 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class AdminService {
 
+
+
     @Autowired
     private RoleDao roleDao;
 
@@ -30,6 +34,9 @@ public class AdminService {
 
     @Autowired
     private TrainingDao trainingDao;
+
+    @Autowired
+    private ServiceDao serviceDao;
 
 
 
@@ -133,4 +140,35 @@ public class AdminService {
         existingTraining.setCost(training.getCost());
         trainingDao.updateTraining(existingTraining);
     }
+
+
+    // ------- Service Section -------
+
+    public void createService(ServiceDto serviceDto){
+        serviceDao.save(
+                digitech.model.Service.builder()
+                        .name(serviceDto.getName())
+                        .description(serviceDto.getDescription())
+                        .cost(serviceDto.getCost())
+                        .build()
+        );
+
+    }
+    public List<digitech.model.Service> getServies(){
+        return serviceDao.getAll();
+    }
+    public digitech.model.Service getService(Long id){
+        return  serviceDao.get(id);
+    }
+    public void updateService(digitech.model.Service service){
+        digitech.model.Service existingService = serviceDao.get(service.getId());
+        existingService.setName(service.getName());
+        existingService.setDescription(service.getDescription());
+        existingService.setCost(service.getCost());
+        serviceDao.update(existingService);
+    }
+    public void deleteService(Long id){
+        serviceDao.delete(id);
+    }
+
 }

@@ -13,9 +13,15 @@ public class ServiceDao {
     @Autowired
     private HibernateTemplate hibernateTemplate;
 
+
     @Transactional
     public void save(Service service){
         this.hibernateTemplate.save(service);
+    }
+
+    @Transactional
+    public void update(Service service){
+        this.hibernateTemplate.update(service);
     }
     @Transactional
     public void delete(Long id){

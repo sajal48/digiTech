@@ -2,6 +2,7 @@
 <%@ page import="digitech.model.User" %>
 <%@ page import="digitech.model.Event" %>
 <%@ page import="digitech.model.Training" %>
+<%@ page import="digitech.model.Service" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -194,26 +195,26 @@
         <th>Cost</th>
         <th>Action</th>
     </tr>
-    <!-- Add a row for each user -->
-    <%--    <%--%>
-    <%--        List<User> users = (List<User>) request.getAttribute("users");--%>
-    <%--        for (User user : users) {--%>
-    <%--    %>--%>
+    <%
+        List<Service> services = (List<Service>) request.getAttribute("sevices");
+        for (Service service : services) {
+    %>
+
     <tr>
         <td>Service name</td>
         <td>Service Description</td>
         <td>Service Cost</td>
-        <%--        <td>--%>
-        <%--            <form action="/admin/user/update" method="post" style="display: inline-block">--%>
-        <%--                <input type="hidden" name="id" value="<%= user.getId() %>">--%>
-        <%--                <input type="hidden" name="name" value="<%= user.getName() %>">--%>
-        <%--                <input type="hidden" name="email" value="<%= user.getEmail() %>">--%>
-        <%--                <input type="hidden" name="role" value="<%= user.getRole().getRoleName() %>">--%>
-        <%--                <input class="button" type="submit" value="Edit">--%>
-        <%--                <!-- <a href="#" class="button">Delete</a> -->--%>
-        <%--            </form>--%>
-        <%--            <a href="/admin/delete_user/<%= user.getId() %>" class="button">Delete</a>--%>
-        <%--        </td>--%>
+                <td>
+                    <form action="/admin/update_service" method="post" style="display: inline-block">
+                        <input type="hidden" name="id" value="<%= service.getId() %>">
+                        <input type="hidden" name="name" value="<%= service.getName() %>">
+                        <input type="hidden" name="description" value="<%= service.getDescription() %>">4
+                        <input type="hidden" name="cost" value="<%= service.getCost() %>">
+                        <input class="button" type="submit" value="Edit">
+                        <!-- <a href="#" class="button">Delete</a> -->
+                    </form>
+                    <a href="/admin/delete_service/"<%= service.getId() %>" class="button">Delete</a>
+                </td>
         <td>
             <form action="/admin/event/update" method="post" style="display: inline-block">
                 <%--            <input type="hidden" name="id" value="<%= event.getId() %>">--%>

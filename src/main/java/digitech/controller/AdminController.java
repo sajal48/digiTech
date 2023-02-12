@@ -2,9 +2,11 @@ package digitech.controller;
 
 import digitech.dao.TrainingDao;
 import digitech.dto.EventDto;
+import digitech.dto.ServiceDto;
 import digitech.dto.TrainingDto;
 import digitech.dto.UserDto;
 import digitech.model.Event;
+import digitech.model.Service;
 import digitech.model.Training;
 import digitech.model.User;
 import digitech.service.AdminService;
@@ -26,9 +28,11 @@ public class AdminController {
         List<User> users = adminService.getUsers();
         List<Event> events=adminService.getEvents();
         List<Training> trainings = adminService.getTrainings();
+        List<Service> services = adminService.getServies();
         model.addAttribute("users",users);
         model.addAttribute("events",events);
         model.addAttribute("trainings",trainings);
+        model.addAttribute("services",services);
         return "admin_dashboard";
     }
 
@@ -56,6 +60,12 @@ public class AdminController {
     @GetMapping("admin/event")
     String addEvent() {
         return "add_event";
+    }
+    @PostMapping("/admin/add_service")
+    String courseUpdate(@RequestParam("id") Long id, Model model) {
+        Service service = adminService.getService(id);
+        model.addAttribute("event", service);
+        return "add_service";
     }
 
     @GetMapping("admin/course")
@@ -191,6 +201,38 @@ public class AdminController {
         model.addAttribute("trainings",trainings);
         return "update_course";
     }
+
+
+    // ----------------SERVICE SECTION ------------------
+
+    @PostMapping(value = "/admin/service")
+    RedirectView createService(@ModelAttribute ServiceDto serviceDto) {
+        adminService.createService(serviceDto);
+        System.out.println(" Service created " + serviceDto);
+        //TODO: change redirection
+        return new RedirectView("/testform");
+    }
+
+    @GetMapping("/admin/services")
+    public void getServices() {
+        List<Service> services = adminService.getServies();
+        System.out.println("Total services: " + services);
+        //TODO: ADD modal return
+    }
+    @PostMapping("/admin/update_service")
+    public RedirectView updateService(@ModelAttribute Service service, Model model) {
+//         Update the user in the database
+        adminService.updateService(service);
+        return new RedirectView("/admin");
+    }
+    @GetMapping("/admin/delete_service/{id}")
+    public RedirectView deleteService(@PathVariable long id,Model model) {
+//         Update the user in the database
+        adminService.deleteService(id);
+        return new RedirectView("/admin");
+
+    }
+
 
 
 
