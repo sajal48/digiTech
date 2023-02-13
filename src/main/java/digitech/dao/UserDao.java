@@ -26,6 +26,8 @@ public class UserDao {
 
 
 
+
+
     public User get(Long id){
         User user = this.hibernateTemplate.get(User.class,id);
         return user;

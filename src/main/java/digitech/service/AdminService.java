@@ -32,6 +32,7 @@ public class AdminService {
     @Autowired
     private EventDao eventDao;
 
+
     @Autowired
     private TrainingDao trainingDao;
 

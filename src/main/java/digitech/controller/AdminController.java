@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -34,6 +35,21 @@ public class AdminController {
         model.addAttribute("trainings",trainings);
         model.addAttribute("services",services);
         return "admin_dashboard";
+    }
+
+    @GetMapping("/user/{id}")
+    public RedirectView userIndex(@PathVariable Long id,  RedirectAttributes redirectAttributes){
+        User user = adminService.getUser(id);
+        redirectAttributes.addFlashAttribute("user",user);
+        return new RedirectView("/");
+    }
+
+
+    @GetMapping("/user/{id}")
+    public RedirectView employeeIndex(@PathVariable Long id,  RedirectAttributes redirectAttributes){
+        User user = adminService.getUser(id);
+        redirectAttributes.addFlashAttribute("user",user);
+        return new RedirectView("/");
     }
 
     @GetMapping("/admin/init_roles")

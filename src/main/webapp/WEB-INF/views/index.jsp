@@ -82,10 +82,10 @@
 
 <body>
 <h2>Hello World!</h2>
-<%User user=(User) request.getAttribute("user"); %>
-<%  if( user!= null){%>
-<p>Hi! My name is <%=user.getName()%></p>
-<%  }%>
+<%--<%User user=(User) request.getAttribute("user"); %>--%>
+<%--<%  if( user!= null){%>--%>
+<%--<p>Hi! My name is <%=user.getName()%></p>--%>
+<%--<%  }%>--%>
 <p>Image:</p>
 <%--<img src="/WEB-INF/res/about.jpg" alt="your image">--%>
 <%--<img src="images/about.jpg" alt="your image">--%>

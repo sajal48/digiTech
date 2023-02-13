@@ -1,11 +1,24 @@
+<%@ page import="digitech.model.User" %>
 <header>
   <div class="header-container">
     <div class="logo">
       <img src="images/logo.jpg" alt="Company Logo">
     </div>
+
     <div class="header-right">
       <div class="user-info">
-        <p>Welcome, <span class="user-name">John Doe</span></p>
+        <%
+          User user = (User) request.getAttribute("user");
+          if(user!=null){
+        %>
+        <p>Welcome, <span class="user-name"><%=user.getName()%></span></p>
+        <%
+          }
+          else{
+            System.out.println("not found");
+
+          }
+        %>
       </div>
       <a href="/login" class="logout-btn">Logout</a>
     </div>
