@@ -53,20 +53,33 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>Login</h2>
-    <div class="form-container">
-        <form action="/user/login" method="post">
-            <input type="text" id="email" name="email" placeholder="email">
-            <br>
-            <input type="password" id="password" name="password" placeholder="password">
-            <br>
-            <input type="submit" value="Login" class="btn">
-        </form>
-        <div class="signup-container">
-            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
-        </div>
+<div class="form-container">
+    <form action="/user/login" method="post">
+        <input type="text" id="email" name="email" placeholder="email">
+        <br>
+        <input type="password" id="password" name="password" placeholder="password">
+        <br>
+        <input type="submit" value="Login" class="btn">
+    </form>
+    <div class="error-container">
+        <%
+            if (request.getAttribute("errorMessage") != null) {
+        %>
+        <p style="color: red;">
+            <%= request.getAttribute("errorMessage") %>
+        </p>
+        <%
+            }
+            else {
+//                String userName=(String) request.getAtrribute("user").getName();
+                request.getSession().setAttribute("userName", "Piyal");
+            }
+        %>
+    </div>
+    <div class="signup-container">
+        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
     </div>
 </div>
+
 </body>
 </html>

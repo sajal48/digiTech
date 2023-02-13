@@ -1,8 +1,8 @@
-<%@ page import="digitech.model.User" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Index page</title>
-    <%@ include file="header.jsp" %>
+    <title>Welcome to DigiTech</title>
+    <jsp:include page="header.jsp"/>
     <style>
         header {
             background-color: #f2f2f2;
@@ -20,7 +20,8 @@
         .logo {
             flex-basis: 20%;
         }
-        .logo img{
+
+        .logo img {
             height: 100px;
             width: 100px;
         }
@@ -76,20 +77,35 @@
             background-color: #ddd;
             color: black;
         }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
 
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            text-align: center;
+            padding: 50px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
     </style>
 </head>
-
 <body>
-<h2>Hello World!</h2>
-<%--<%User user=(User) request.getAttribute("user"); %>--%>
-<%--<%  if( user!= null){%>--%>
-<%--<p>Hi! My name is <%=user.getName()%></p>--%>
-<%--<%  }%>--%>
-<p>Image:</p>
-<%--<img src="/WEB-INF/res/about.jpg" alt="your image">--%>
-<%--<img src="images/about.jpg" alt="your image">--%>
-<%--<img src="/images/about.jpg" alt="your image">--%>
-<img src="<%=request.getContextPath()%>/images/about.jpg" alt="your image">
+<h1>Welcome to DigiTech</h1>
+<div class="container">
+    <p>We are a group of internet marketers, web designers and digital marketing experts.</p>
+    <p>Our focus is providing value to our clients using a holistic marketing approach.</p>
+    <p>We help you grow online and start getting results within days with honest reporting and quality customer service.</p>
+</div>
 </body>
 </html>

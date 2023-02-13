@@ -15,6 +15,11 @@ header {
     flex-basis: 20%;
 }
 
+.logo img {
+    height: 100px;
+    width: 100px;
+}
+
 .header-right {
     flex-basis: 80%;
     text-align: right;

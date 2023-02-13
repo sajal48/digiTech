@@ -6,7 +6,81 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <jsp:include page="header.jsp"/>
     <style>
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            flex-basis: 20%;
+        }
+
+        .logo img {
+            height: 100px;
+            width: 100px;
+        }
+
+        .header-right {
+            flex-basis: 80%;
+            text-align: right;
+        }
+
+        .user-info {
+            margin-right: 20px;
+        }
+
+        .user-name {
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
         /* Add some styles for the whole page */
         body {
             font-family: Arial, sans-serif;
@@ -193,7 +267,7 @@
 <table>
     <tr>
         <th>Name</th>
-        <th>Description</th>
+<%--        <th>Description</th>--%>
         <th>Cost</th>
         <th>Action</th>
     </tr>
@@ -204,7 +278,7 @@
     %>
     <tr>
         <td><%= service.getName() %></td>
-        <td><%= service.getDescription() %></td>
+<%--        <td><%= service.getDescription() %></td>--%>
         <td><%= service.getCost() %></td>
         <td>
             <form action="/admin/service/update" method="post" style="display: inline-block">
@@ -261,13 +335,13 @@
         }
     %>
 </table>
-<h2 style="display: inline-block">Courses </h2>
+<h2 style="display: inline-block">Trainings </h2>
 <a href="admin/course" class="add-user-btn" style="float: right;">Add course</a>
 
 <table>
     <tr>
         <th>Course Name</th>
-        <th>Description</th>
+<%--        <th>Description</th>--%>
         <th>Cost</th>
         <th>Actions</th>
     </tr>
@@ -279,7 +353,7 @@
     %>
     <tr>
         <td><%= training.getName() %></td>
-        <td><%= training.getDescription() %></td>
+<%--        <td><%= training.getDescription() %></td>--%>
         <td><%= training.getCost() %></td>
         <td>
             <form action="/admin/course/update" method="post" style="display: inline-block">

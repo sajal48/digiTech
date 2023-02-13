@@ -8,15 +8,11 @@
     <div class="header-right">
       <div class="user-info">
         <%
-          User user = (User) request.getAttribute("user");
-          if(user!=null){
+          User user = (User) session.getAttribute("user");
+          if (user != null) {
         %>
-        <p>Welcome, <span class="user-name"><%=user.getName()%></span></p>
+        <p>Welcome, <span class="user-name"><%=user.getName()+" ("+user.getRole().getRoleName()+")"%></span></p>
         <%
-          }
-          else{
-            System.out.println("not found");
-
           }
         %>
       </div>
