@@ -1,8 +1,15 @@
 <%@ page import="java.util.List" %>
 <%@ page import="digitech.model.Service" %>
+<%@ page import="digitech.model.User" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <%
+        User loggedIn = (User) session.getAttribute("user");
+        if (loggedIn==null || !loggedIn.getRole().getRoleName().equals("EMPLOYEE")) {
+            response.sendRedirect("/not_authorized");
+        }
+    %>
     <jsp:include page="header.jsp"/>
     <style>
         header {

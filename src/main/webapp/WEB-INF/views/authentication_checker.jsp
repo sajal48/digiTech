@@ -1,9 +1,8 @@
 <%@ page import="digitech.model.User" %>
 
 <%
-    User user = (User) session.getAttribute("user");
-    if (user == null) {
-        System.out.println(user);
+    User loggedIn = (User) session.getAttribute("user");
+    if (loggedIn==null || !loggedIn.getRole().getRoleName().equals("ADMIN")) {
         response.sendRedirect("/not_authorized");
     }
 %>
