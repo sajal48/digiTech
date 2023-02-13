@@ -72,14 +72,14 @@
 <form action="/admin/user" method="post">
   <!-- Add the email field -->
   <label for="email">Email:</label>
-  <input type="email" id="email" name="email">
+  <input type="email" id="email" name="email" required>
 
   <!-- Add the username field -->
   <label for="name">Username:</label>
-  <input type="text" id="name" name="name">
+  <input type="text" id="name" name="name" required>
 
   <label for="password">Password:</label>
-  <input type="password" id="password" name="password">
+  <input type="password" id="password" name="password" required>
   <!-- Add the role field -->
   <label for="role">Role:</label>
   <select id="role" name="role">

@@ -1,20 +1,18 @@
 package digitech.controller;
 
 
-import digitech.dto.TrainingDto;
 import digitech.model.Event;
 import digitech.model.Service;
-import digitech.model.User;
+import digitech.model.Training;
 import digitech.service.AdminService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -22,6 +20,9 @@ public class HomeController {
 
 	@Autowired
 	private AdminService adminService;
+
+	@Autowired
+	HttpServletRequest request;
 //	@PostConstruct
 //	public String init(Model model) {
 //		System.out.println("index");
@@ -43,20 +44,38 @@ public class HomeController {
 		return "service_form";
 	}
 	@RequestMapping("/not_authorized")
-	public String notAuthorized(Model model) {
+	public String notAuthorized() {
 		System.out.println("not_authorized");
 		return "not_authorized";
 	}
-
+	@RequestMapping("/not_found")
+	public String notFound() {
+		System.out.println("404: no found!");
+		return "not_found";
+	}
 
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home() {
+		List<Service> services=adminService.getServies();
+		List<Event> events=adminService.getEvents();
+		List<Training> trainings=adminService.getTrainings();
+		request.getSession().setAttribute("services",services);
+		request.getSession().setAttribute("trainings",trainings);
+		request.getSession().setAttribute("events",events);
+
 		System.out.println("index");
 		return "index";
 	}
 	@GetMapping("/login")
 	String login(){
 		return "login";
+	}
+
+	@GetMapping("/logout")
+	RedirectView logout(){
+		request.getSession().setAttribute("user", null);
+		request.getSession().setAttribute("isLoggedIn",false);
+		return new RedirectView("/login");
 	}
 
 	@GetMapping("/signup")
@@ -70,11 +89,11 @@ public class HomeController {
 	}
 	@RequestMapping("/events")
 	public String events() {
-		System.out.println("event_main_page");
-		return "event_main_page";
+		request.getSession().setAttribute("events",adminService.getEvents());
+		return "events";
 	}
 	@RequestMapping("/services")
-	public String services() {
+	public String services(Model model) {
 		System.out.println("services");
 		return "services";
 	}
@@ -105,6 +124,7 @@ public class HomeController {
 	}
 	@RequestMapping("/trainings")
 	public String trainings() {
+		request.getSession().setAttribute("trainings",adminService.getTrainings());
 		System.out.println("trainings");
 		return "trainings";
 	}

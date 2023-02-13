@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ page import="digitech.model.Training" %>
+<%@ page import="java.util.List" %>
+<%@ page import="digitech.model.Training" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Index page</title>
-    <%@ include file="header.jsp" %>
+    <jsp:include page="header.jsp"/>
     <style>
         header {
             background-color: #f2f2f2;
@@ -79,164 +81,86 @@
             background-color: #ddd;
             color: black;
         }
+        .trainings-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        .training-card {
+            display: inline-block;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 400px;
+            margin: 20px auto;
+            text-align: center;
+            position: relative;
+            vertical-align: top;
+        }
+        .training-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
 
+        .training-description {
+            font-size: 16px;
+            margin: 20px 0;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .training-cost {
+            font-size: 18px;
+            font-weight: bold;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .buy-training-btn {
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .center-div {
+            width: 500px;
+            margin: 50px auto;
+            text-align: center;
+        }
     </style>
-    <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
+    <title>Trainings</title>
+
 </head>
-
-
 <body>
-
-
-<!-- Start the Layout section -->
-<main>
-    <img
-            style="display: block; margin-left: auto; margin-right: auto; width: 80%;"
-            src="images/users.jpg" alt="" width="900px">
-
-    <div style="margin-left: auto; margin-right: auto; width: 80%;"
-         class="row row-cols-1 row-cols-md-3 g-4 mt-5">
-        <div class="col">
-            <div class="card h-100">
-                <img src="images/seo.jpg" class="card-img-top" alt="SEO">
-                <div class="card-body">
-                    <h5 class="card-title">SEO Training</h5>
-                    <p class="card-text">SEO stands for “search engine
-                        optimization.” In simple terms, it means the process of improving
-                        your site to increase its visibility when people search for
-                        products or services related to your business in Google, Bing,
-                        and other search engines.</p>
-                </div>
-                <div class="card-footer bg-danger ">
-                    <p class="text-light"
-                       style="text-align: center; font-size: x-large; font-weight: 600;"
-                       class="text-muted">Enroll Now</p>
-                </div>
-            </div>
+<div class="center-div">
+    <h1>Our Trainings</h1>
+</div>
+<div class="trainings-container">
+    <% List<Training> trainings=(List<Training>) request.getSession().getAttribute("trainings");
+        for(Training training : trainings) { %>
+    <div class="training-card">
+        <div class="training-name">
+            <%= training.getName() %>
         </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img src="images/smm.png" class="card-img-top" alt="social">
-                <div class="card-body">
-                    <h5 class="card-title">Social Media Marketing</h5>
-                    <p class="card-text">Social marketing efforts make it easier
-                        to change behavior by making sure the necessary supports are not
-                        only available, but also easily accessible to the most people
-                        possible. Day by day it's demand increasing.</p>
-                </div>
-                <div class="card-footer bg-danger ">
-                    <p class="text-light"
-                       style="text-align: center; font-size: x-large; font-weight: 600;"
-                       class="text-muted">Enroll Now</p>
-                </div>
-            </div>
+        <div class="training-description">
+            <%= training.getDescription() %>
         </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img src="images/bc1.jpg" class="card-img-top" alt="BlockChain"
-                     width="50%">
-                <div class="card-body">
-                    <h5 class="card-title">BlockChain Training</h5>
-                    <p class="card-text">Blockchain helps in the verification and
-                        traceability of multistep transactions needing verification and
-                        traceability. It can provide secure transactions, reduce
-                        compliance costs, and speed up data transfer processing.</p>
-                </div>
-                <div class="card-footer bg-danger ">
-                    <p class="text-light"
-                       style="text-align: center; font-size: x-large; font-weight: 600;"
-                       class="text-muted">Enroll Now</p>
-                </div>
-            </div>
+        <div class="training-cost">
+            Cost: $<%= training.getCost() %>
         </div>
-
-        <div class="col">
-            <div class="card h-100">
-                <img src="images/ft1.png" class="card-img-top" alt="freeCourses">
-                <div class="card-body">
-                    <h5 class="card-title">Free Courses</h5>
-                    <p class="card-text">These courses will help you to know the
-                        basic concept of IT world. These course can be the grate
-                        foundation for you to the IT world. Not only that these course
-                        will help you to know our teaching process. Hopefully you will
-                        enjoy our courses!!!</p>
-                </div>
-                <div class="card-footer bg-danger ">
-                    <p class="text-light"
-                       style="text-align: center; font-size: x-large; font-weight: 600;"
-                       class="text-muted">Enroll Now</p>
-                </div>
-            </div>
-        </div>
+        <button class="buy-training-btn">Buy Training</button>
     </div>
-
-    <div class="mt-5" style="margin-left: auto; margin-right: auto; width: 80%;" class="mt-5 text-success">
-        <h2 style=" font-size: 40px" class="text-success">Ask your Question</h2>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label"></label>
-            <textarea class="form-control" id="exampleFormControlTextarea1"
-                      rows="20" cols="30"></textarea>
-        </div>
-        <button style="color:white; font-size: x-large" type="button" class="btn btn-danger">Submit</button>
-    </div>
-
-</main>
-<!-- End the Layout section -->
-
-
-<br>
-<br>
-<br>
-<!-- Start the Footer section -->
-<footer>
-    <div class=" w-100 d-flex nav-justified align-items-center"
-         style="background-color: black;">
-        <div>
-            <h1 style="color: aliceblue; margin-left: 60px;">Welcome to</h1>
-        </div>
-
-        <div style="margin-top: 20px;" class="w-100">
-            <ul style="height: 300px; margin-top: 20px;"
-                class="navbar-nav mr-5 mt-lg-0 ml-2 d-flex justify-content-center  ">
-                <li class="nav-item active "><a
-                        style="font-size: larger; color: aliceblue;"
-                        class="nav-link font-weight-bold mr-4" href="#">About Us</a></li>
-
-
-                <li class="nav-item active"><a
-                        style="font-size: larger; color: aliceblue;"
-                        class="nav-link font-weight-bold mr-4" href="#"> Contact Us</a></li>
-
-
-                <li class="nav-item active"><a
-                        style="font-size: larger; color: aliceblue;"
-                        class="nav-link font-weight-bold mr-4" href="#"> Training</a></li>
-
-
-                <li class="nav-item active"><a
-                        style="font-size: larger; color: aliceblue;"
-                        class="nav-link font-weight-bold mr-4" href="#">Events</a></li>
-
-
-                <li class="nav-item active"><a
-                        style="font-size: larger; color: aliceblue;"
-                        class="nav-link font-weight-bold mr-4" href="#">Privacy Policy</a></li>
-            </ul>
-        </div>
-
-        <div>
-            <h1 style="color: red; margin-right: 60px;">DigiTech</h1>
-        </div>
-    </div>
-</footer>
-<!-- End the Layout section -->
-
+    <% } %>
+</div>
 </body>
 </html>

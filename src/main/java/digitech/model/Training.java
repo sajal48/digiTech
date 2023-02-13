@@ -19,6 +19,7 @@ public class Training {
     private Long id;
 
     private String name;
+    @Column(length = 500)
     private String description;
     private Long cost;
 

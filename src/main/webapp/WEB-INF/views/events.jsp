@@ -1,6 +1,5 @@
-<%@ page import="digitech.model.Service" %>
+<%@ page import="digitech.model.Event" %>
 <%@ page import="java.util.List" %>
-<%@ page import="digitech.model.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -81,56 +80,41 @@
             background-color: #ddd;
             color: black;
         }
-        .services-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 50px;
-        }
-        .service-card {
-            display: inline-block;
+         .events-container {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+         }
+
+        .event-card {
+            width: 400px;
+            height: 250px;
             background-color: white;
+            margin: 20px;
+            box-shadow: 0px 0px 10px #888888;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            height: 400px;
-            margin: 20px auto;
             text-align: center;
-            position: relative;
-            vertical-align: top;
+            padding: 20px;
         }
-        .service-name {
+
+        .event-name {
             font-size: 22px;
             font-weight: bold;
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
 
-        .service-description {
-            font-size: 16px;
-            margin: 20px 0;
-            text-align: left;
-            padding: 0 20px;
-        }
-
-        .service-cost {
+        .event-details {
             font-size: 18px;
-            font-weight: bold;
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
+            margin-bottom: 20px;
         }
 
-        .buy-service-btn {
-            border: none;
-            background-color: #4CAF50;
-            color: white;
+        .event-location {
             font-size: 16px;
-            padding: 10px 20px;
-            border-radius: 25px;
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .event-date {
+            font-size: 16px;
         }
         .center-div {
             width: 500px;
@@ -138,31 +122,30 @@
             text-align: center;
         }
     </style>
-    <title>Services</title>
+
+    <title>Events</title>
 
 </head>
 <body>
 <div class="center-div">
-    <h1>Our Services</h1>
+    <h1>Our Events</h1>
 </div>
-<div class="services-container">
-    <% List<Service> services=(List<Service>) request.getSession().getAttribute("services");
-        for(Service service : services) { %>
-    <div class="service-card">
-        <div class="service-name">
-            <%= service.getName() %>
+<div class="events-container">
+    <% List<Event> events=(List<Event>) request.getSession().getAttribute("events");
+        for(Event event : events) { %>
+    <div class="event-card">
+        <div class="event-name">
+            <%= event.getName() %>
         </div>
-        <div class="service-description">
-            <%= service.getDescription() %>
+        <div class="event-details">
+            <%= event.getDetails() %>
         </div>
-        <div class="service-cost">
-            Cost: $<%= service.getCost() %>
+        <div class="event-location">
+            Cost: $<%= event.getLocation() %>
         </div>
-        <form action="/user/buy_service" method="post">
-            <input type="hidden" name="userId" value="<%=((User)request.getSession().getAttribute("user")).getId() %>">
-            <input type="hidden" name="serviceId" value="<%=service.getId() %>">
-            <button type="submit" class="buy-service-btn">Buy Service</button>
-        </form>
+        <div class="event-date">
+            Cost: $<%= event.getDate() %>
+        </div>
     </div>
     <% } %>
 </div>

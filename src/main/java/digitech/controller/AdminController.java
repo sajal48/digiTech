@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping("/admin")
     public String adminDashBoard(Model model){
@@ -213,10 +216,11 @@ public class AdminController {
     }
 
     @GetMapping("/admin/services")
-    public void getServices() {
+    public RedirectView getServices() {
         List<Service> services = adminService.getServies();
+        request.getSession().setAttribute("services",services);
         System.out.println("Total services: " + services);
-        //TODO: ADD modal return
+        return new RedirectView("/services");
     }
     @PostMapping("/admin/update_service")
     public RedirectView updateService(@ModelAttribute Service service, Model model) {

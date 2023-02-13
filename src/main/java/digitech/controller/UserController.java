@@ -63,10 +63,10 @@ public class UserController {
         userService.registerEvent(userId, eventId);
         //TODO: add redirection
     }
-    @PostMapping(value = "/user/buy_serice")
-    void buyService(@RequestParam Long userId, @RequestParam Long serviceId) {
+    @PostMapping(value = "/user/buy_service")
+    RedirectView buyService(@RequestParam Long userId, @RequestParam Long serviceId) {
         userService.buyService(userId, serviceId);
-        //TODO: add redirection
+        return new RedirectView("/services");
     }
 
     @PostMapping(value = "/user/training/enroll")

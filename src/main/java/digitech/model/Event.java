@@ -20,6 +20,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(length = 500)
     private String details;
     private String location;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
