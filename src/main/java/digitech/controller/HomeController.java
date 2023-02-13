@@ -42,6 +42,11 @@ public class HomeController {
 		System.out.println("form-test");
 		return "service_form";
 	}
+	@RequestMapping("/not_authorized")
+	public String notAuthorized(Model model) {
+		System.out.println("not_authorized");
+		return "not_authorized";
+	}
 
 
 	@RequestMapping("/")

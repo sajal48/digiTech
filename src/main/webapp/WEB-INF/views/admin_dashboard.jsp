@@ -3,10 +3,17 @@
 <%@ page import="digitech.model.Event" %>
 <%@ page import="digitech.model.Training" %>
 <%@ page import="digitech.model.Service" %>
+<jsp:include page="authentication_checker.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="header.jsp"/>
+
+    <%
+        User loggedIn = (User) session.getAttribute("user");
+        if (loggedIn==null || !loggedIn.getRole().getRoleName().equals("ADMIN")) {
+            response.sendRedirect("/not_authorized");
+        }
+    %>
     <style>
         header {
             background-color: #f2f2f2;

@@ -34,7 +34,7 @@ public class UserController {
                 case "ADMIN":
                     return new RedirectView("/admin");
                 case "USER":
-                    return new RedirectView("/user");
+                    return new RedirectView("/");
                 case "EMPLOYEE":
                     return new RedirectView("/employee");
             }
