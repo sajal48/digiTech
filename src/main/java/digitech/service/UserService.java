@@ -68,7 +68,6 @@ public class UserService  {
                 .service(service)
                 .build();
         serviceDetailsDao.save(details);
-
     }
     public void enrollTraining(Long userId, Long trainingId){
         User user = userDao.get(userId);

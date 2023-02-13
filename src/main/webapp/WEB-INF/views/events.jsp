@@ -132,6 +132,7 @@
 </div>
 <div class="events-container">
     <% List<Event> events=(List<Event>) request.getSession().getAttribute("events");
+    if(events!=null){
         for(Event event : events) { %>
     <div class="event-card">
         <div class="event-name">
@@ -147,7 +148,8 @@
             Cost: $<%= event.getDate() %>
         </div>
     </div>
-    <% } %>
+    <% }
+    }%>
 </div>
 </body>
 </html>

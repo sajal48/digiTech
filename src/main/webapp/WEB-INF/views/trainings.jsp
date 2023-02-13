@@ -1,7 +1,8 @@
 <%@ page import="digitech.model.Training" %>
 <%@ page import="java.util.List" %>
 <%@ page import="digitech.model.Training" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="digitech.model.User" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html>
@@ -81,12 +82,14 @@
             background-color: #ddd;
             color: black;
         }
+
         .trainings-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 50px;
         }
+
         .training-card {
             display: inline-block;
             background-color: white;
@@ -99,6 +102,7 @@
             position: relative;
             vertical-align: top;
         }
+
         .training-name {
             font-size: 22px;
             font-weight: bold;
@@ -132,6 +136,7 @@
             right: 20px;
             cursor: pointer;
         }
+
         .center-div {
             width: 500px;
             margin: 50px auto;
@@ -146,8 +151,9 @@
     <h1>Our Trainings</h1>
 </div>
 <div class="trainings-container">
-    <% List<Training> trainings=(List<Training>) request.getSession().getAttribute("trainings");
-        for(Training training : trainings) { %>
+    <% List<Training> trainings = (List<Training>) request.getSession().getAttribute("trainings");
+        if (trainings != null) {
+            for (Training training : trainings) { %>
     <div class="training-card">
         <div class="training-name">
             <%= training.getName() %>
@@ -158,9 +164,22 @@
         <div class="training-cost">
             Cost: $<%= training.getCost() %>
         </div>
-        <button class="buy-training-btn">Buy Training</button>
+        <% User user = (User) request.getSession().getAttribute("user");
+        %>
+        <form action="/user/training/enroll" method="post">
+            <% if (user != null) {%>
+            <input type="hidden" name="userId" value="<%=(user.getId())%>">
+            <%}%>
+            <%--            <input type="hidden" name="userId" value="<%=((User)request.getSession().getAttribute("user")).getId() %>">--%>
+            <input type="hidden" name="trainingId" value="<%=training.getId() %>">
+            <button type="submit" class="buy-training-btn" <% if (user == null) {%>
+                    disabled
+                    <%}%>>Enroll now
+            </button>
+        </form>
     </div>
-    <% } %>
+    <% }
+    }%>
 </div>
 </body>
 </html>

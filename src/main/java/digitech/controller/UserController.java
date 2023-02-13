@@ -1,6 +1,7 @@
 package digitech.controller;
 
 import digitech.model.User;
+import digitech.service.AdminService;
 import digitech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
     @Autowired
     private UserService userService;
+
 
     @Autowired
     private HttpServletRequest request;
@@ -70,9 +72,10 @@ public class UserController {
     }
 
     @PostMapping(value = "/user/training/enroll")
-    void enrollTraining(@RequestParam Long userId, @RequestParam Long trainingId) {
+    RedirectView enrollTraining(@RequestParam Long userId, @RequestParam Long trainingId) {
+
         userService.enrollTraining(userId, trainingId);
-        //TODO: add redirection
+        return new RedirectView("/trainings");
     }
 
 }

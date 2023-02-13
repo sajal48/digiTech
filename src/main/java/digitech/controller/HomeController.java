@@ -59,6 +59,7 @@ public class HomeController {
 		List<Service> services=adminService.getServies();
 		List<Event> events=adminService.getEvents();
 		List<Training> trainings=adminService.getTrainings();
+
 		request.getSession().setAttribute("services",services);
 		request.getSession().setAttribute("trainings",trainings);
 		request.getSession().setAttribute("events",events);
@@ -94,6 +95,7 @@ public class HomeController {
 	}
 	@RequestMapping("/services")
 	public String services(Model model) {
+		request.getSession().setAttribute("services",adminService.getServies());
 		System.out.println("services");
 		return "services";
 	}

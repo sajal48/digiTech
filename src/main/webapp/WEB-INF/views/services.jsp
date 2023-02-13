@@ -1,7 +1,7 @@
 <%@ page import="digitech.model.Service" %>
 <%@ page import="java.util.List" %>
 <%@ page import="digitech.model.User" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html>
@@ -81,12 +81,14 @@
             background-color: #ddd;
             color: black;
         }
+
         .services-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 50px;
         }
+
         .service-card {
             display: inline-block;
             background-color: white;
@@ -99,6 +101,7 @@
             position: relative;
             vertical-align: top;
         }
+
         .service-name {
             font-size: 22px;
             font-weight: bold;
@@ -132,6 +135,7 @@
             right: 20px;
             cursor: pointer;
         }
+
         .center-div {
             width: 500px;
             margin: 50px auto;
@@ -146,8 +150,9 @@
     <h1>Our Services</h1>
 </div>
 <div class="services-container">
-    <% List<Service> services=(List<Service>) request.getSession().getAttribute("services");
-        for(Service service : services) { %>
+    <% List<Service> services = (List<Service>) request.getSession().getAttribute("services");
+        if (services != null) {
+            for (Service service : services) { %>
     <div class="service-card">
         <div class="service-name">
             <%= service.getName() %>
@@ -158,13 +163,20 @@
         <div class="service-cost">
             Cost: $<%= service.getCost() %>
         </div>
+        <% User user = (User) request.getSession().getAttribute("user");
+        %>
         <form action="/user/buy_service" method="post">
-            <input type="hidden" name="userId" value="<%=((User)request.getSession().getAttribute("user")).getId() %>">
+            <% if (user != null) {%>
+            <input type="hidden" name="userId" value="<%=(user.getId())%>">
+            <%}%>
             <input type="hidden" name="serviceId" value="<%=service.getId() %>">
-            <button type="submit" class="buy-service-btn">Buy Service</button>
+            <button type="submit" class="buy-service-btn" <% if (user == null) {%>
+            disabled
+            <%}%>>Buy Service</button>
         </form>
     </div>
-    <% } %>
+    <% }
+    }%>
 </div>
 </body>
 </html>
