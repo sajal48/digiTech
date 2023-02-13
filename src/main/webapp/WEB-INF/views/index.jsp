@@ -1,3 +1,4 @@
+<%@ page import="digitech.model.User" %>
 <html>
 <head>
     <title>Index page</title>
@@ -81,8 +82,10 @@
 
 <body>
 <h2>Hello World!</h2>
-<%String name=(String) request.getAttribute("name"); %>
-<p>Hi! My name is <%=name%></p>
+<%User user=(User) request.getAttribute("user"); %>
+<%  if( user!= null){%>
+<p>Hi! My name is <%=user.getName()%></p>
+<%  }%>
 <p>Image:</p>
 <%--<img src="/WEB-INF/res/about.jpg" alt="your image">--%>
 <%--<img src="images/about.jpg" alt="your image">--%>

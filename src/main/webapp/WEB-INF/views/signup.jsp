@@ -56,8 +56,8 @@
 <div class="container">
     <h2>Sign Up</h2>
     <div class="form-container">
-        <form action="signup" method="post">
-            <input type="text" name="username" placeholder="Username">
+        <form action="/user/signup" method="post">
+            <input type="text" name="name" placeholder="Username">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
             <input type="submit" value="Sign Up">
