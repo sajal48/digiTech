@@ -22,6 +22,6 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "service_details_id")
     private ServiceDetails serviceDetails;
-    @ManyToMany(fetch = FetchType.EAGER ,mappedBy = "tasks")
-    private Set<User> assignTo;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User assignTo;
 }

@@ -5,10 +5,7 @@ import digitech.dto.ServiceDto;
 
 import digitech.dto.TrainingDto;
 import digitech.dto.UserDto;
-import digitech.model.Event;
-import digitech.model.Role;
-import digitech.model.Training;
-import digitech.model.User;
+import digitech.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +22,9 @@ public class AdminService {
 
     @Autowired
     private TaskDao taskDao;
+
+    @Autowired
+    private ServiceDetailsDao serviceDetailsDao;
 
     @Autowired
     private UserDao userDao;
@@ -66,12 +66,7 @@ public class AdminService {
     public void deleteEvent(Long id){
          eventDao.delete(id);
     }
-    public void registerEvent(Long userId, Long eventId){
-        User user = userDao.get(userId);
-        Event event = eventDao.get(eventId);
-        user.getRegisteredAtEvent().add(event);
-        userDao.save(user);
-    }
+
 
     // ------- User Section -------
 
@@ -175,4 +170,20 @@ public class AdminService {
     public void deleteCourse(long id) {
         trainingDao.delete(id);
     }
+
+
+
+    //relation operations
+    public void assignTask(Long detailsId,Long userId ){
+        User user = userDao.get(userId);
+        ServiceDetails details = serviceDetailsDao.get(detailsId);
+        Task task = Task.builder()
+                .assignTo(user)
+                .serviceDetails(details)
+                .build();
+        taskDao.save(task);
+        details.setAssigned(true);
+        serviceDetailsDao.update(details);
+    }
+
 }

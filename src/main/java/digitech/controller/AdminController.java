@@ -30,10 +30,12 @@ public class AdminController {
         List<Event> events=adminService.getEvents();
         List<Training> trainings = adminService.getTrainings();
         List<Service> services = adminService.getServies();
+        List<User> employees = adminService.getEmployees();
         model.addAttribute("users",users);
         model.addAttribute("events",events);
         model.addAttribute("trainings",trainings);
         model.addAttribute("services",services);
+        model.addAttribute("employees",employees);
         return "admin_dashboard";
     }
 
@@ -45,12 +47,7 @@ public class AdminController {
     }
 
 
-//    @GetMapping("/user/{id}")
-//    public RedirectView employeeIndex(@PathVariable Long id,  RedirectAttributes redirectAttributes){
-//        User user = adminService.getUser(id);
-//        redirectAttributes.addFlashAttribute("user",user);
-//        return new RedirectView("/");
-//    }
+
 
     @GetMapping("/admin/init_roles")
     public void initRoles() {
@@ -169,11 +166,7 @@ public class AdminController {
         adminService.deleteCourse(id);
         return new RedirectView("/admin");
     }
-    @PostMapping(value = "/admin/event/register")
-    void registerEvent(@RequestParam Long userId, @RequestParam Long eventId) {
-        adminService.registerEvent(userId, eventId);
-        //TODO: add redirection
-    }
+
 
 
 
@@ -253,13 +246,12 @@ public class AdminController {
         //TODO: ADD modal return
     }
 
-//    @GetMapping("/admin")
-//    public String adminDashboard() {
-//        employeeService.getTasks();
-//        System.out.println("Total tasks: " + employeeService.getTasks());
-//        //TODO: ADD modal return
-//        return "admin_dashboard";
-//    }
+    @PostMapping("/admin/assign_task")
+    public RedirectView assignTask(@RequestParam long detailsId,@RequestParam long userId) {
+        adminService.assignTask(detailsId,userId);
+        //TODO: ADD modal return
+        return new RedirectView("/admin");
+    }
 
 
 //    @PostMapping(value = "/admin/user")

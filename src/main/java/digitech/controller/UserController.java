@@ -56,4 +56,23 @@ public class UserController {
         }
 
     }
+
+
+    @PostMapping(value = "/user/event/register")
+    void registerEvent(@RequestParam Long userId, @RequestParam Long eventId) {
+        userService.registerEvent(userId, eventId);
+        //TODO: add redirection
+    }
+    @PostMapping(value = "/user/buy_serice")
+    void buyService(@RequestParam Long userId, @RequestParam Long serviceId) {
+        userService.buyService(userId, serviceId);
+        //TODO: add redirection
+    }
+
+    @PostMapping(value = "/user/training/enroll")
+    void enrollTraining(@RequestParam Long userId, @RequestParam Long trainingId) {
+        userService.enrollTraining(userId, trainingId);
+        //TODO: add redirection
+    }
+
 }

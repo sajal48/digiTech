@@ -17,6 +17,11 @@ public class ServiceDetailsDao {
     public void save(ServiceDetails serviceDetails){
         this.hibernateTemplate.save(serviceDetails);
     }
+
+    @Transactional
+    public void update(ServiceDetails serviceDetails){
+        this.hibernateTemplate.update(serviceDetails);
+    }
     @Transactional
     public void delete(Long id){
         ServiceDetails serviceDetails =  this.hibernateTemplate.get(ServiceDetails.class,id);

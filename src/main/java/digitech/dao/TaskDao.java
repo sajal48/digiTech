@@ -24,6 +24,11 @@ public class TaskDao {
         this.hibernateTemplate.delete(task);
     }
 
+    @Transactional
+    public void update(Task task){
+        this.hibernateTemplate.update(task);
+    }
+
 
     public Task get(Long id){
         Task task = this.hibernateTemplate.get(Task.class,id);

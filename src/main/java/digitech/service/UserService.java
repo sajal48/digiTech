@@ -1,9 +1,7 @@
 package digitech.service;
 
-import digitech.dao.RoleDao;
-import digitech.dao.UserDao;
-import digitech.model.Role;
-import digitech.model.User;
+import digitech.dao.*;
+import digitech.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -17,6 +15,17 @@ public class UserService  {
     private UserDao userDao;
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private EventDao eventDao;
+
+    @Autowired
+    private TrainingDao trainingDao;
+
+    @Autowired
+    private ServiceDao serviceDao;
+
+    @Autowired
+    private ServiceDetailsDao serviceDetailsDao;
 
 
     public User login(String email, String password){
@@ -42,6 +51,30 @@ public class UserService  {
                 .build());
         return userDao.findByEmail(email);
 
+    }
+
+
+    public void registerEvent(Long userId, Long eventId){
+        User user = userDao.get(userId);
+        Event event = eventDao.get(eventId);
+        user.getRegisteredAtEvent().add(event);
+        userDao.save(user);
+    }
+    public void buyService(Long userId, Long serviceId){
+        User user = userDao.get(userId);
+        digitech.model.Service service = serviceDao.get(serviceId);
+        ServiceDetails details = ServiceDetails.builder()
+                .serviceFor(user)
+                .service(service)
+                .build();
+        serviceDetailsDao.save(details);
+
+    }
+    public void enrollTraining(Long userId, Long trainingId){
+        User user = userDao.get(userId);
+        Training training = trainingDao.get(trainingId);
+        training.getEnrolledUser().add(user);
+        trainingDao.updateTraining(training);
     }
 
 

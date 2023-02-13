@@ -25,7 +25,7 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @ManyToMany(fetch = FetchType.EAGER )
+    @OneToMany (fetch = FetchType.EAGER )
     @JoinTable(
             name = "e_task",
             joinColumns = @JoinColumn(name = "d_user_id"),
