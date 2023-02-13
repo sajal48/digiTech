@@ -6,17 +6,17 @@
     </div>
 
     <div class="header-right">
-      <div class="user-info">
+      <div class="user-info" style="padding: 30px">
         <%
           User user = (User) session.getAttribute("user");
           if (user != null) {
         %>
         <p>Welcome, <span class="user-name"><%=user.getName()+" ("+user.getRole().getRoleName()+")"%></span></p>
+        <a href="/login" class="logout-btn" style="text-decoration: none">Logout</a>
         <%
           }
         %>
       </div>
-      <a href="/login" class="logout-btn">Logout</a>
     </div>
   </div>
   <nav>
