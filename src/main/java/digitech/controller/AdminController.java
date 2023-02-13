@@ -45,12 +45,12 @@ public class AdminController {
     }
 
 
-    @GetMapping("/user/{id}")
-    public RedirectView employeeIndex(@PathVariable Long id,  RedirectAttributes redirectAttributes){
-        User user = adminService.getUser(id);
-        redirectAttributes.addFlashAttribute("user",user);
-        return new RedirectView("/");
-    }
+//    @GetMapping("/user/{id}")
+//    public RedirectView employeeIndex(@PathVariable Long id,  RedirectAttributes redirectAttributes){
+//        User user = adminService.getUser(id);
+//        redirectAttributes.addFlashAttribute("user",user);
+//        return new RedirectView("/");
+//    }
 
     @GetMapping("/admin/init_roles")
     public void initRoles() {
