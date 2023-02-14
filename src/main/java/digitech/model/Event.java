@@ -31,5 +31,4 @@ public class Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "d_user_id"))
     private Set<User> registrations;
-
 }

@@ -1,7 +1,6 @@
 package digitech.dao;
 
 import digitech.model.Training;
-import digitech.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Component;
@@ -15,12 +14,13 @@ public class TrainingDao {
     private HibernateTemplate hibernateTemplate;
 
     @Transactional
-    public void save(Training training){
+    public void save(Training training) {
         this.hibernateTemplate.save(training);
     }
+
     @Transactional
-    public void delete(Long id){
-        Training training =  this.hibernateTemplate.get(Training.class,id);
+    public void delete(Long id) {
+        Training training = this.hibernateTemplate.get(Training.class, id);
         this.hibernateTemplate.delete(training);
     }
 
@@ -29,15 +29,13 @@ public class TrainingDao {
         this.hibernateTemplate.update(training);
     }
 
-
-    public Training get(Long id){
-        Training training = this.hibernateTemplate.get(Training.class,id);
+    public Training get(Long id) {
+        Training training = this.hibernateTemplate.get(Training.class, id);
         return training;
     }
 
-    public List<Training> getAll(){
+    public List<Training> getAll() {
         List<Training> trainings = this.hibernateTemplate.loadAll(Training.class);
         return trainings;
     }
-
 }

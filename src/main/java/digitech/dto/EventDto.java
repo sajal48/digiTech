@@ -11,11 +11,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventDto {
-//    private Long id;
     private String name;
     private String details;
     private String location;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-
 }

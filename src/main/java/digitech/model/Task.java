@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,7 +17,6 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean status = false;
-
     @ManyToOne
     @JoinColumn(name = "service_details_id")
     private ServiceDetails serviceDetails;

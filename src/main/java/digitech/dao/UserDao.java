@@ -16,24 +16,21 @@ public class UserDao {
     private HibernateTemplate hibernateTemplate;
 
     @Transactional
-    public void save(User user){
+    public void save(User user) {
         this.hibernateTemplate.save(user);
     }
+
     @Transactional
     public void updateUser(User user) {
         this.hibernateTemplate.update(user);
     }
 
-
-
-
-
-    public User get(Long id){
-        User user = this.hibernateTemplate.get(User.class,id);
+    public User get(Long id) {
+        User user = this.hibernateTemplate.get(User.class, id);
         return user;
     }
 
-    public User findByEmail(String email){
+    public User findByEmail(String email) {
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
         criteria.add(Restrictions.eq("email", email));
         List<User> users = (List<User>) this.hibernateTemplate.findByCriteria(criteria);
@@ -45,14 +42,13 @@ public class UserDao {
     }
 
     @Transactional
-    public void delete(Long id){
-        User user =  this.hibernateTemplate.get(User.class,id);
+    public void delete(Long id) {
+        User user = this.hibernateTemplate.get(User.class, id);
         this.hibernateTemplate.delete(user);
     }
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         List<User> users = this.hibernateTemplate.loadAll(User.class);
         return users;
     }
-
 }

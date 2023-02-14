@@ -128,11 +128,18 @@
 </head>
 <body>
 <div class="center-div">
-    <h1>Our Events</h1>
+    <% List<Event> events=(List<Event>) request.getSession().getAttribute("events");
+        if (events.isEmpty()) {
+    %>
+    <h1>There is no events currently!</h1>
+    <%}
+    else{
+    %>
+    <h1>Our Services</h1>
+    <%}%>
 </div>
 <div class="events-container">
-    <% List<Event> events=(List<Event>) request.getSession().getAttribute("events");
-    if(events!=null){
+    <%if(!events.isEmpty()){
         for(Event event : events) { %>
     <div class="event-card">
         <div class="event-name">

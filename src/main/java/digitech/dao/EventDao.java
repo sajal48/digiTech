@@ -1,7 +1,6 @@
 package digitech.dao;
 
 
-import digitech.dto.EventDto;
 import digitech.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -16,28 +15,28 @@ public class EventDao {
     private HibernateTemplate hibernateTemplate;
 
     @Transactional
-    public void save(Event event){
+    public void save(Event event) {
         this.hibernateTemplate.save(event);
     }
+
     @Transactional
-    public void delete(Long id){
-        Event event =  this.hibernateTemplate.get(Event.class,id);
+    public void delete(Long id) {
+        Event event = this.hibernateTemplate.get(Event.class, id);
         this.hibernateTemplate.delete(event);
     }
 
     @Transactional
-    public void update(Event event){
+    public void update(Event event) {
         this.hibernateTemplate.update(event);
     }
 
-    public Event get(Long id){
-        Event event = this.hibernateTemplate.get(Event.class,id);
+    public Event get(Long id) {
+        Event event = this.hibernateTemplate.get(Event.class, id);
         return event;
     }
 
-    public List<Event> getAll(){
+    public List<Event> getAll() {
         List<Event> events = this.hibernateTemplate.loadAll(Event.class);
         return events;
     }
-
 }

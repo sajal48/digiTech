@@ -148,11 +148,18 @@
 </head>
 <body>
 <div class="center-div">
+    <% List<Training> trainings = (List<Training>) request.getSession().getAttribute("trainings");
+        if (trainings.isEmpty()) {
+    %>
+    <h1>There is no courses currently!</h1>
+    <%}
+    else{
+    %>
     <h1>Our Trainings</h1>
+    <%}%>
 </div>
 <div class="trainings-container">
-    <% List<Training> trainings = (List<Training>) request.getSession().getAttribute("trainings");
-        if (trainings != null) {
+    <%if (!trainings.isEmpty()) {
             for (Training training : trainings) { %>
     <div class="training-card">
         <div class="training-name">
@@ -166,16 +173,34 @@
         </div>
         <% User user = (User) request.getSession().getAttribute("user");
         %>
-        <form action="/user/training/enroll" method="post">
+        <form action="<%= user==null?"/login":"/user/training/enroll"%>" method="<%= user==null?"get":"post"%>">
             <% if (user != null) {%>
             <input type="hidden" name="userId" value="<%=(user.getId())%>">
             <%}%>
-            <%--            <input type="hidden" name="userId" value="<%=((User)request.getSession().getAttribute("user")).getId() %>">--%>
             <input type="hidden" name="trainingId" value="<%=training.getId() %>">
-            <button type="submit" class="buy-training-btn" <% if (user == null) {%>
-                    disabled
-                    <%}%>>Enroll now
-            </button>
+            <% if(user==null){
+                %>
+                <button type="submit" class="buy-training-btn" onclick="alert('You must login first')">Enroll now</button>
+            <% }
+            else {
+                List<Training> myTrainings=(List<Training>) request.getSession().getAttribute("myTraining");
+
+                if(myTrainings!=null && myTrainings.contains(training)){ %>
+            <button class="buy-training-btn" disabled>Course bought</button>
+            <%
+                }
+            else {%>
+            <button type="submit" class="buy-training-btn" onclick="alert('Course bought successfully!');">Enroll now</button>
+               <%
+                    }
+               }
+            %>
+<%--            <button type="submit" class="buy-training-btn" onclick="alert('Service bought successfully!');"<%--%>
+<%--&lt;%&ndash;                if (user == null) {%>&ndash;%&gt;--%>
+<%--                    disabled--%>
+<%--                    >Enroll now--%>
+<%--&lt;%&ndash;                <%}%>&ndash;%&gt;--%>
+<%--            </button>--%>
         </form>
     </div>
     <% }

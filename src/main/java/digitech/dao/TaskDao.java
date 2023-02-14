@@ -15,30 +15,29 @@ public class TaskDao {
     private HibernateTemplate hibernateTemplate;
 
     @Transactional
-    public void save(Task task){
+    public void save(Task task) {
         this.hibernateTemplate.save(task);
     }
+
     @Transactional
-    public void delete(Long id){
-        Task task =  this.hibernateTemplate.get(Task.class,id);
+    public void delete(Long id) {
+        Task task = this.hibernateTemplate.get(Task.class, id);
         this.hibernateTemplate.delete(task);
     }
 
     @Transactional
-    public void update(Task task){
+    public void update(Task task) {
         this.hibernateTemplate.update(task);
     }
 
-
-    public Task get(Long id){
-        Task task = this.hibernateTemplate.get(Task.class,id);
+    public Task get(Long id) {
+        Task task = this.hibernateTemplate.get(Task.class, id);
         return task;
     }
 
-    public List<Task> getAll(){
+    public List<Task> getAll() {
         List<Task> tasks = this.hibernateTemplate.loadAll(Task.class);
         return tasks;
     }
-
 }
 

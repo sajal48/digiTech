@@ -1,6 +1,8 @@
 <%@ page import="digitech.model.Service" %>
 <%@ page import="java.util.List" %>
 <%@ page import="digitech.model.User" %>
+<%@ page import="digitech.model.ServiceDetails" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -90,7 +92,7 @@
         }
 
         .service-card {
-            display: inline-block;
+            display: block;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -147,12 +149,27 @@
 </head>
 <body>
 <div class="center-div">
+    <% List<Service> services = (List<Service>) request.getSession().getAttribute("services");
+        if (services.isEmpty()) {
+    %>
+    <h1>There is no services currently!</h1>
+    <%}
+        else{
+    %>
     <h1>Our Services</h1>
+    <%}%>
 </div>
 <div class="services-container">
-    <% List<Service> services = (List<Service>) request.getSession().getAttribute("services");
-        if (services != null) {
-            for (Service service : services) { %>
+    <%
+        if (!services.isEmpty()) {
+            List<ServiceDetails> myServices=(List<ServiceDetails>) request.getSession().getAttribute("myServices");
+            List<Service> ownedService = new ArrayList<>();
+            List<Long> ids = new ArrayList<>();
+            if(myServices!=null){
+                myServices.forEach(serviceDetails -> ownedService.add(serviceDetails.getService()));
+                ownedService.forEach(s -> ids.add(s.getId()));
+            }
+            for (Service service : services) {%>
     <div class="service-card">
         <div class="service-name">
             <%= service.getName() %>
@@ -165,15 +182,30 @@
         </div>
         <% User user = (User) request.getSession().getAttribute("user");
         %>
-        <form action="/user/buy_service" method="post">
-            <% if (user != null) {%>
-            <input type="hidden" name="userId" value="<%=(user.getId())%>">
-            <%}%>
-            <input type="hidden" name="serviceId" value="<%=service.getId() %>">
-            <button type="submit" class="buy-service-btn" <% if (user == null) {%>
-            disabled
-            <%}%>>Buy Service</button>
-        </form>
+        <form action="<%= user==null?"/login":"/user/buy_service"%>" method="<%= user==null?"get":"post"%>">
+                <% if (user != null) {%>
+            <input type="hidden" name="userId" value="<%= (user.getId())%>">
+                <%}
+                long pId=service.getId();
+                System.out.println("pId: "+pId);%>
+                    <input type="hidden" name="serviceId" value="<%=pId%>">
+                <% if(user==null){
+                %>
+            <button type="submit" class="buy-service-btn" onclick="alert('You must login first')">Enroll now</button>
+                <% }
+            else {
+                System.out.println(service.getId()+ "____");
+                System.out.println(ids+"***");
+                if(ids!=null && ids.contains(service.getId())){%>
+            <button class="buy-service-btn" disabled>Course bought</button>
+                <%
+                }
+            else {%>
+            <button type="submit" class="buy-service-btn" onclick="alert('Course bought successfully!');">Enroll now</button>
+                <%
+            }
+               }
+            %>
     </div>
     <% }
     }%>
