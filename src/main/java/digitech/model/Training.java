@@ -23,12 +23,7 @@ public class Training {
     private String description;
     private Long cost;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "enrolled_user",
-            joinColumns = @JoinColumn(name = "training_id"),
-            inverseJoinColumns = @JoinColumn(name = "d_user_id"))
-    private Set<User> enrolledUser;
+
 
 
 }

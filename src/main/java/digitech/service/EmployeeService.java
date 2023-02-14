@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,8 +25,8 @@ public class EmployeeService {
     private TaskDao taskDao;
 
     public List<Task> myTasks(Long userId){
-        User user = userDao.get(userId);
-        return  user.getTasks().stream().collect(Collectors.toList());
+        List<Task> tasks = taskDao.getAll().stream().filter(e-> Objects.equals(e.getAssignTo().getId(), userId)).collect(Collectors.toList());
+        return  tasks;
     }
 
     public void changeTaskStatus(Long taskId,boolean status){

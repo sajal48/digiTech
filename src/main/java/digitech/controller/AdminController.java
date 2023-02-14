@@ -5,10 +5,7 @@ import digitech.dto.EventDto;
 import digitech.dto.ServiceDto;
 import digitech.dto.TrainingDto;
 import digitech.dto.UserDto;
-import digitech.model.Event;
-import digitech.model.Service;
-import digitech.model.Training;
-import digitech.model.User;
+import digitech.model.*;
 import digitech.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,11 +31,13 @@ public class AdminController {
         List<Training> trainings = adminService.getTrainings();
         List<Service> services = adminService.getServies();
         List<User> employees = adminService.getEmployees();
-        model.addAttribute("users",users);
+        List<ServiceDetails> details = adminService.getServiceDetails();
+       model.addAttribute("users",users);
         model.addAttribute("events",events);
         model.addAttribute("trainings",trainings);
         model.addAttribute("services",services);
         model.addAttribute("employees",employees);
+        model.addAttribute("details",details);
         return "admin_dashboard";
     }
 
@@ -52,9 +51,11 @@ public class AdminController {
 
 
 
-    @GetMapping("/admin/init_roles")
+    @GetMapping("/init")
     public void initRoles() {
+
         adminService.initRoles();
+        adminService.initAdmin();
     }
 
     @GetMapping("admin/user")
@@ -251,11 +252,15 @@ public class AdminController {
     }
 
     @PostMapping("/admin/assign_task")
-    public RedirectView assignTask(@RequestParam long detailsId,@RequestParam long userId) {
-        adminService.assignTask(detailsId,userId);
+    public RedirectView assignTask() {
+        long detailsId = Long.parseLong(request.getParameter("detailsId"));
+        String userId = request.getParameter("userId");
+        adminService.assignTask(detailsId, Long.valueOf(userId));
         //TODO: ADD modal return
         return new RedirectView("/admin");
     }
+
+
 
 
 //    @PostMapping(value = "/admin/user")

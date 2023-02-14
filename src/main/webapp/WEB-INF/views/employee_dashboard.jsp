@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="digitech.model.Service" %>
 <%@ page import="digitech.model.User" %>
+<%@ page import="digitech.model.Task" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,38 @@
             response.sendRedirect("/not_authorized");
         }
     %>
-    <jsp:include page="header.jsp"/>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/"><img src="images/logo.jpg" alt="Company Logo"></a>
+            </div>
+
+            <div class="header-right">
+                <div class="user-info" style="padding: 30px">
+                    <%
+                        User user = (User) session.getAttribute("user");
+                        if (user != null) {
+                    %>
+                    <p>Welcome, <span class="user-name"><%=user.getName()+" ("+user.getRole().getRoleName()+")"%></span></p>
+                    <a href="/logout" class="logout-btn" style="text-decoration: none">Logout</a>
+                    <% }
+                    else{
+                    %>
+                    <a href="/login" class="logout-btn" style="text-decoration: none">Login</a>
+                    <%
+                        }
+                    %>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/events">Events</a></li>
+                <li><a href="/privacy_policy">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </header>
     <style>
         header {
             background-color: #f2f2f2;
@@ -201,35 +233,34 @@
 <h2 style="display: inline-block">Active Services</h2>
 <table>
     <tr>
-        <th>Name</th>
-        <th>Service For</th>
+        <th>Task Id</th>
+        <th>Task Name</th>
         <th>Status</th>
         <th>Action</th>
     </tr>
-<%--    <%--%>
-<%--        List<Service> services = (List<Service>) request.getAttribute("services");--%>
-<%--        if(services!=null){--%>
-<%--        for (Service service : services) {--%>
-<%--    %>--%>
+    <%
+        List<Task> tasks = (List<Task>) request.getAttribute("myTasks");
+        System.out.println("task"+ tasks);
+        if(tasks!=null){
+        for (Task task : tasks) {
+    %>
     <tr>
-        <td>Service name</td>
-        <td>Sajal</td>
-        <td>Ongoing</td>
+        <td><%= task.getId() %></td>
+        <td><%= task.getServiceDetails().getService().getName() %></td>
+        <td><%= task.isStatus()?"Done":"Pending" %></td>
+
         <td>
-            <form action="#" method="post" style="display: inline-block">
-<%--                <input type="hidden" name="id" value="<%= service.getId() %>">--%>
-<%--                <input type="hidden" name="name" value="<%= service.getName() %>">--%>
-<%--                <input type="hidden" name="description" value="<%= service.getDescription() %>">--%>
-<%--                <input type="hidden" name="cost" value="<%= service.getCost() %>">--%>
+            <form action="/employee/taskStatus" method="post" style="display: inline-block">
+                <input type="hidden" name="taskId" value="<%= task.getId() %>">
                 <input class="button" type="submit" value="Mark done">
                 <!-- <a href="#" class="button">Delete</a> -->
             </form>
         </td>
     </tr>
-<%--      <%--%>
-<%--            }--%>
-<%--        }--%>
-<%--      %>--%>
+      <%
+            }
+        }
+      %>
 </table>
 </body>
 </html>

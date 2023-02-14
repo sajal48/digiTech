@@ -25,7 +25,7 @@ public class ServiceDetails {
     @ManyToOne
     private User serviceFor;
 
-    private boolean assigned ;
+    private boolean assigned = false;
 
 
 

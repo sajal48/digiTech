@@ -1,8 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="digitech.model.User" %>
-<%@ page import="digitech.model.Event" %>
-<%@ page import="digitech.model.Training" %>
-<%@ page import="digitech.model.Service" %>
+<%@ page import="digitech.model.*" %>
 <jsp:include page="authentication_checker.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -278,32 +275,39 @@
     <tr>
         <th>Name</th>
         <th>Service for</th>
-        <th>Assigned to</th>
+        <th>Active</th>
     </tr>
     <!-- Add a row for each user -->
-<%--    <%--%>
-<%--        List<User> users = (List<User>) request.getAttribute("users");--%>
-<%--        for (User user : users) {--%>
-<%--    %>--%>
+    <%
+        List<ServiceDetails> serviceDetails = ( List<ServiceDetails>) request.getAttribute("details");
+        for (ServiceDetails details : serviceDetails) {
+    %>
     <tr>
-        <td>Service name</td>
-        <td>Piyal</td>
-        <td>Sajal</td>
-<%--        <td>--%>
-<%--            <form action="/admin/user/update" method="post" style="display: inline-block">--%>
-<%--                <input type="hidden" name="id" value="<%= user.getId() %>">--%>
-<%--                <input type="hidden" name="name" value="<%= user.getName() %>">--%>
-<%--                <input type="hidden" name="email" value="<%= user.getEmail() %>">--%>
-<%--                <input type="hidden" name="role" value="<%= user.getRole().getRoleName() %>">--%>
-<%--                <input class="button" type="submit" value="Edit">--%>
-<%--                <!-- <a href="#" class="button">Delete</a> -->--%>
-<%--            </form>--%>
-<%--            <a href="/admin/delete_user/<%= user.getId() %>" class="button">Delete</a>--%>
-<%--        </td>--%>
+        <td><%=details.getService().getName()%></td>
+        <td><%=details.getServiceFor().getName()%></td>
+        <td><%=details.isAssigned()?"Assigned":"Not Assigned"%></td>
+        <td>
+            <form action="/admin/assign_task" method="post" style="display: inline-block">
+                <input type="hidden" name="detailsId" value="<%= details.getId() %>">
+                <select name="userId" >
+                    <%
+                        List<User> employeeList = ( List<User>) request.getAttribute("employees");
+                        for (User employee : employeeList) {
+
+                    %>
+                    <option value=<%=employee.getId()%> > <%=employee.getName()%></option>
+                    <%
+                        }
+                    %>
+                </select>
+                <input class="button" type="submit" value="Assign">
+                <!-- <a href="#" class="button">Delete</a> -->
+            </form>
+        </td>
     </tr>
-<%--    <%--%>
-<%--        }--%>
-<%--    %>--%>
+    <%
+        }
+    %>
 </table>
 <!-- Add the table for the user list -->
 <h2 style="display: inline-block">Users </h2>

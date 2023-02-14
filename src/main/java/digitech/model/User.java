@@ -25,19 +25,12 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany (fetch = FetchType.EAGER )
-    @JoinTable(
-            name = "e_task",
-            joinColumns = @JoinColumn(name = "d_user_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id"))
-    private Set<Task> tasks ;
 
     @ManyToMany(fetch = FetchType.EAGER ,mappedBy = "registrations")
     private Set<Event> registeredAtEvent;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Training> myTrainings;
 
-    @ManyToMany (fetch = FetchType.EAGER, mappedBy = "enrolledUser")
-    private Set<Training> enrolledAt;
 
-    @OneToMany (fetch = FetchType.EAGER, mappedBy = "serviceFor")
-    private Set<ServiceDetails> myServices;
+
 }

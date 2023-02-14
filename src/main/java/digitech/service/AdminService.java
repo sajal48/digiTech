@@ -47,6 +47,18 @@ public class AdminService {
         roleDao.save(Role.builder().roleName("EMPLOYEE").build());
         roleDao.save(Role.builder().roleName("USER").build());
     }
+    public void initAdmin(){
+        List<Role> roles = roleDao.getAll();
+        Role setRole = roles.stream().filter(role -> "ADMIN".equals(role.getRoleName()))
+                .findAny()
+                .orElse(null);
+        userDao.save(User.builder()
+                .email("admin@gmail.com")
+                .name("admin")
+                .password("1234")
+                .role(setRole)
+                .build());
+    }
 
 
     // ------- Event Section -------
@@ -184,6 +196,9 @@ public class AdminService {
         taskDao.save(task);
         details.setAssigned(true);
         serviceDetailsDao.update(details);
+    }
+    public List<ServiceDetails> getServiceDetails(){
+        return serviceDetailsDao.getAll();
     }
 
 }

@@ -17,7 +17,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean status;
+    private boolean status = false;
 
     @ManyToOne
     @JoinColumn(name = "service_details_id")

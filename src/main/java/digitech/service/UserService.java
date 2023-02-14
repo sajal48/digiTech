@@ -72,8 +72,8 @@ public class UserService  {
     public void enrollTraining(Long userId, Long trainingId){
         User user = userDao.get(userId);
         Training training = trainingDao.get(trainingId);
-        training.getEnrolledUser().add(user);
-        trainingDao.updateTraining(training);
+        user.getMyTrainings().add(training);
+        userDao.updateUser(user);
     }
 
 
