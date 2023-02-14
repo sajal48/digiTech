@@ -98,5 +98,6 @@
     <!-- Add the submit button -->
     <input type="submit" value="Update User">
 </form>
+
 </body>
 </html>

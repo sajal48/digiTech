@@ -112,6 +112,7 @@ public class AdminController {
     public RedirectView updateUser(@ModelAttribute UserDto userDto,Model model) {
 //         Update the user in the database
         adminService.updateUser(userDto);
+
         return new RedirectView("/admin");
     }
     @GetMapping("/admin/delete_user/{id}")

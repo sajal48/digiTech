@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService  {
@@ -75,6 +76,14 @@ public class UserService  {
         user.getMyTrainings().add(training);
         userDao.updateUser(user);
     }
+
+    public List<ServiceDetails> getMyServices(User user){
+        List<ServiceDetails> serviceDetails = serviceDetailsDao.getAll();
+        List<ServiceDetails> myServices = serviceDetails.stream().filter(e->e.getServiceFor().getId().equals(user.getId())).collect(Collectors.toList());
+        return myServices;
+    }
+
+
 
 
 }

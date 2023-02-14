@@ -11,7 +11,12 @@
           User user = (User) session.getAttribute("user");
           if (user != null) {
         %>
-        <p>Welcome, <span class="user-name"><%=user.getName()+" ("+user.getRole().getRoleName()+")"%></span></p>
+        <p>Welcome, <span class="user-name">
+          <a href="/user/profile"  style="text-decoration: none"> <%=user.getName()+" ("+user.getRole().getRoleName()+")"%></a>
+
+        </span>
+        </p>
+
         <a href="/logout" class="logout-btn" style="text-decoration: none">Logout</a>
         <% }
         else{

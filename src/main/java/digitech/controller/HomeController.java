@@ -104,6 +104,7 @@ public class HomeController {
 		System.out.println("service_form");
 		return "add_user";
 	}
+
 	@RequestMapping("/admin/add_service")
 	public String addServiceForm() {
 		System.out.println("service_form");
@@ -136,6 +137,8 @@ public class HomeController {
 		System.out.println("trainings");
 		return "privacy_policy";
 	}
+
+
 
 
 }
