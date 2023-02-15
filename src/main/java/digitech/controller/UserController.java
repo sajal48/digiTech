@@ -74,8 +74,16 @@ public class UserController {
     }
 
     @PostMapping(value = "/user/event/register")
-    void registerEvent(@RequestParam Long userId, @RequestParam Long eventId) {
-        userService.registerEvent(userId, eventId);
+    RedirectView registerEvent( @RequestParam Long eventId) {
+        User user = (User)request.getSession().getAttribute("user");
+        if(user == null){
+            return new RedirectView("/login");
+        } else{
+            userService.registerEvent(user.getId(), eventId);
+            return new RedirectView("/");
+
+        }
+
     }
 
     @PostMapping(value = "/user/buy_service")

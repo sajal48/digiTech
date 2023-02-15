@@ -154,6 +154,13 @@
         <div class="event-date">
             Cost: $<%= event.getDate() %>
         </div>
+        <form action="/user/event/register" method="post" style="display: inline-block">
+            <input type="hidden" name="eventId" value="<%= event.getId() %>">
+            <button type="submit" class="buy-service-btn >Enroll now</button>
+
+
+
+        </form>
     </div>
     <% }
     }%>
