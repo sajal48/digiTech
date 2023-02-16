@@ -1,9 +1,6 @@
 package digitech.controller;
 
-import digitech.dto.EventDto;
-import digitech.dto.ServiceDto;
-import digitech.dto.TrainingDto;
-import digitech.dto.UserDto;
+import digitech.dto.*;
 import digitech.model.*;
 import digitech.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -244,5 +241,19 @@ public class AdminController {
         adminService.assignTask(detailsId, Long.valueOf(userId));
         //TODO: ADD modal return
         return new RedirectView("/admin");
+    }
+
+    @PostMapping("/course-details")
+    public String courseDetails(@RequestParam long courseId,Model model){
+        CourseDetailsDto details = adminService.getCourseDetails(courseId);
+        model.addAttribute("courseDetails",details);
+        return "";
+    }
+
+    @PostMapping("/course-details")
+    public String eventDetails(@RequestParam long eventId,Model model){
+        EventDetailsDto details = adminService.getEventDetails(eventId);
+        model.addAttribute("eventDetails",details);
+        return "";
     }
 }

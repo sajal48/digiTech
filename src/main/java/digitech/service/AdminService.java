@@ -1,13 +1,12 @@
 package digitech.service;
 
 import digitech.dao.*;
-import digitech.dto.ServiceDto;
-import digitech.dto.TrainingDto;
-import digitech.dto.UserDto;
+import digitech.dto.*;
 import digitech.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -194,5 +193,30 @@ public class AdminService {
 
     public List<ServiceDetails> getServiceDetails() {
         return serviceDetailsDao.getAll();
+    }
+
+    public CourseDetailsDto getCourseDetails(long courseId) {
+        Training training = trainingDao.get(courseId);
+        List<User> users = userDao.getAll();
+        List<User> b_user = new ArrayList<>();
+        for (User user:users) {
+            if(user.getMyTrainings().contains(training)){
+               b_user.add(user);
+            }
+        }
+        return new CourseDetailsDto(courseId,training.getName(),b_user);
+    }
+
+    public EventDetailsDto getEventDetails(long eventId) {
+        Event event = eventDao.get(eventId);
+        List<User> users = userDao.getAll();
+        List<User> b_user = new ArrayList<>();
+        for (User user:users) {
+            if(user.getRegisteredAtEvent().contains(event)){
+                b_user.add(user);
+            }
+        }
+        return new EventDetailsDto(eventId,event.getName(),b_user);
+
     }
 }
