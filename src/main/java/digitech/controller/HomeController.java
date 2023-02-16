@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -97,14 +98,26 @@ public class HomeController {
     @RequestMapping("/events")
     public String events() {
         request.getSession().setAttribute("events", adminService.getEvents());
+        User u = (User) request.getSession().getAttribute("user");
+
+        if (u != null) {
+            User user = adminService.getUser(u.getId());
+            request.getSession().setAttribute("user",user);
+            Set<Event> m = user.getRegisteredAtEvent();
+            List<Event> myEvent = new ArrayList<>(m);
+            request.getSession().setAttribute("myEvent", myEvent);
+        }
         return "events";
     }
 
     @RequestMapping("/services")
     public String services() {
         request.getSession().setAttribute("services", adminService.getServies());
-        User user = (User) request.getSession().getAttribute("user");
-        if (user != null) {
+        User u = (User) request.getSession().getAttribute("user");
+
+        if (u != null) {
+            User user = adminService.getUser(u.getId());
+            request.getSession().setAttribute("user",user);
             List<ServiceDetails> myServices = new ArrayList<>(userService.getMyServices(user));
             request.getSession().setAttribute("myServices", myServices);
         }
@@ -145,9 +158,13 @@ public class HomeController {
     @RequestMapping("/trainings")
     public String trainings() {
         request.getSession().setAttribute("trainings", adminService.getTrainings());
-        User user = (User) request.getSession().getAttribute("user");
-        if (user != null) {
-            List<Training> myTraining = new ArrayList<>(user.getMyTrainings());
+       User u = (User) request.getSession().getAttribute("user");
+
+        if (u != null) {
+            User user = adminService.getUser(u.getId());
+            request.getSession().setAttribute("user",user);
+            Set<Training> m = user.getMyTrainings();
+            List<Training> myTraining = new ArrayList<>(m);
             request.getSession().setAttribute("myTraining", myTraining);
         }
         System.out.println("trainings");

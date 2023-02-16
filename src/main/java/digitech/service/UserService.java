@@ -52,7 +52,7 @@ public class UserService {
         User user = userDao.get(userId);
         Event event = eventDao.get(eventId);
         user.getRegisteredAtEvent().add(event);
-        userDao.save(user);
+        userDao.updateUser(user);
     }
 
     public void buyService(Long userId, Long serviceId) {

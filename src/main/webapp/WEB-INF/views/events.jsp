@@ -148,6 +148,13 @@
 
 </head>
 <body>
+
+<%
+    User user = (User) request.getSession().getAttribute("user");
+    List<Event> myEvents=(List<Event>) request.getSession().getAttribute("myEvent");
+%>
+
+
 <div class="center-div">
     <% List<Event> events = (List<Event>) request.getSession().getAttribute("events");
         if (events.isEmpty()) {
@@ -173,7 +180,22 @@
         <div class="event-details">
             <%= event.getDetails() %>
         </div>
-            <button class="buy-event-btn" onclick="alert('Please call: +60 11-64374797!');">Call to register</button>
+        <form action="<%= user==null?"/login":"/user/event/register"%>" method="<%= user==null?"get":"post"%>">
+
+            <% if(user==null){ %>
+            <button type="submit" class="buy-event-btn" onclick="alert('You must login first')">Register</button>
+            <% } else { %>
+            <input type="hidden" name="eventId" value="<%=event.getId()%>">
+            <% if(!myEvents.isEmpty() && myEvents.contains(event)) { %>
+            <button type="button" class="buy-event-btn" >Register</button>
+            <% } else{ %>
+            <button type="submit" class="buy-event-btn" onclick="alert('Registered to Event!');">Register</button>
+            <% } %>
+            <% } %>
+
+
+        </form>
+
     </div>
     <% }
     }%>

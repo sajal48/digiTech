@@ -23,7 +23,7 @@ public class User {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "registrations")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Event> registeredAtEvent;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Training> myTrainings;

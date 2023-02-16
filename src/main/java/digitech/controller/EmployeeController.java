@@ -2,6 +2,7 @@ package digitech.controller;
 
 import digitech.model.Task;
 import digitech.model.User;
+import digitech.service.AdminService;
 import digitech.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,14 @@ public class EmployeeController {
 
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private AdminService adminService;
 
     @GetMapping("/employee")
     public String employeeDashboard(Model model) {
-        User user = (User) request.getSession().getAttribute("user");
+        User u = (User) request.getSession().getAttribute("user");
+        User user = adminService.getUser(u.getId());
+        request.getSession().setAttribute("user",user);
         List<Task> myTaks = employeeService.myTasks(user.getId());
         model.addAttribute("myTasks", myTaks);
         return "employee_dashboard";

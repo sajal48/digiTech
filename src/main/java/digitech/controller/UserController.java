@@ -32,11 +32,15 @@ public class UserController {
 
     @GetMapping("/user/profile")
     public String userProfilePage(Model model) {
-        User user = (User) request.getSession().getAttribute("user");
+        User u = (User) request.getSession().getAttribute("user");
+        User user  = adminService.getUser(u.getId());
+
         List<Training> myTraining = new ArrayList<>(user.getMyTrainings());
         model.addAttribute("myTraining", myTraining);
         List<ServiceDetails> myServices = new ArrayList<>(userService.getMyServices(user));
         model.addAttribute("myServices", myServices);
+        request.getSession().setAttribute("user",user);
+
         return "user_profile";
     }
 
@@ -75,12 +79,15 @@ public class UserController {
 
     @PostMapping(value = "/user/event/register")
     RedirectView registerEvent( @RequestParam Long eventId) {
-        User user = (User)request.getSession().getAttribute("user");
-        if(user == null){
+        User u = (User)request.getSession().getAttribute("user");
+
+        if(u == null){
             return new RedirectView("/login");
         } else{
-            userService.registerEvent(user.getId(), eventId);
-            return new RedirectView("/");
+            userService.registerEvent(u.getId(), eventId);
+            User user  = adminService.getUser(u.getId());
+            request.getSession().setAttribute("user",user);
+            return new RedirectView("/events");
 
         }
 

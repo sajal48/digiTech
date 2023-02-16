@@ -25,10 +25,4 @@ public class Event {
     private String location;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "registered_user",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "d_user_id"))
-    private Set<User> registrations;
 }
