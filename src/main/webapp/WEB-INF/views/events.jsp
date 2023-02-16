@@ -1,6 +1,9 @@
 <%@ page import="digitech.model.Event" %>
 <%@ page import="java.util.List" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="digitech.model.User" %>
+<%@ page import="digitech.model.ServiceDetails" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html>
@@ -80,87 +83,97 @@
             background-color: #ddd;
             color: black;
         }
-         .events-container {
-             display: flex;
-             flex-wrap: wrap;
-             justify-content: center;
-         }
+
+        .events-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 50px;
+        }
 
         .event-card {
-            width: 400px;
-            height: 250px;
+            display: block;
             background-color: white;
-            margin: 20px;
-            box-shadow: 0px 0px 10px #888888;
             border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 400px;
+            margin: 20px auto;
             text-align: center;
-            padding: 20px;
+            position: relative;
+            vertical-align: top;
         }
 
         .event-name {
             font-size: 22px;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
-        .event-details {
+        .event-description {
+            font-size: 16px;
+            margin: 20px 0;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .event-cost {
             font-size: 18px;
-            margin-bottom: 20px;
+            font-weight: bold;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
         }
 
-        .event-location {
+        .buy-event-btn {
+            border: none;
+            background-color: #4CAF50;
+            color: white;
             font-size: 16px;
-            margin-bottom: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            position: absolute;
+            bottom: 20px;
+            right: 70px;
+            cursor: pointer;
         }
 
-        .event-date {
-            font-size: 16px;
-        }
         .center-div {
             width: 500px;
             margin: 50px auto;
             text-align: center;
         }
     </style>
-
     <title>Events</title>
 
 </head>
 <body>
 <div class="center-div">
-    <% List<Event> events=(List<Event>) request.getSession().getAttribute("events");
+    <% List<Event> events = (List<Event>) request.getSession().getAttribute("events");
         if (events.isEmpty()) {
     %>
     <h1>There is no events currently!</h1>
     <%}
     else{
     %>
-    <h1>Our Services</h1>
+    <h1>Our Events</h1>
     <%}%>
 </div>
 <div class="events-container">
-    <%if(!events.isEmpty()){
-        for(Event event : events) { %>
+    <%
+        if (!events.isEmpty()) {
+            for (Event event : events) {%>
     <div class="event-card">
         <div class="event-name">
             <%= event.getName() %>
         </div>
+        <div style="padding-bottom: 20px">
+            Location: <%= event.getLocation() %> (<%= event.getDate().toString().substring(0,10)%>)
+        </div>
         <div class="event-details">
             <%= event.getDetails() %>
         </div>
-        <div class="event-location">
-            Cost: $<%= event.getLocation() %>
-        </div>
-        <div class="event-date">
-            Cost: $<%= event.getDate() %>
-        </div>
-        <form action="/user/event/register" method="post" style="display: inline-block">
-            <input type="hidden" name="eventId" value="<%= event.getId() %>">
-            <button type="submit" class="buy-service-btn >Enroll now</button>
-
-
-
-        </form>
+            <button class="buy-event-btn" onclick="alert('Please call: +60 11-64374797!');">Call to register</button>
     </div>
     <% }
     }%>

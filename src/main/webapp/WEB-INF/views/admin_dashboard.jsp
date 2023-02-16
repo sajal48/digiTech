@@ -338,7 +338,19 @@
                 <input class="button" type="submit" value="Edit">
                 <!-- <a href="#" class="button">Delete</a> -->
             </form>
-            <a href="/admin/delete_user/<%= user.getId() %>" class="button">Delete</a>
+            <a href="/admin/delete_user/<%= user.getId() %>" class="button" onclick="return confirmDelete('<%= user.getId()%>%>')">Delete</a>
+
+            <script>
+                function confirmDelete(userId) {
+                    if (confirm("Do you really want to delete?")) {
+                        window.location.href = "/admin/delete_user/"+userId;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            </script>
         </td>
     </tr>
     <%
@@ -373,7 +385,19 @@
                 <input class="button" type="submit" value="Edit">
                 <!-- <a href="#" class="button">Delete</a> -->
             </form>
-        <a href="/admin/delete_service/<%= service.getId() %>" class="button">Delete</a>
+            <a href="/admin/delete_service/<%= service.getId() %>" class="button" onclick="return confirmDelete('<%= service.getId()%>%>')">Delete</a>
+
+            <script>
+                function confirmDelete(serviceId) {
+                    if (confirm("Do you really want to delete?")) {
+                        window.location.href = "/admin/delete_service/"+serviceId;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            </script>
         </td>
     </tr>
       <%
@@ -411,7 +435,19 @@
             <input class="button" type="submit" value="Edit">
             <!-- <a href="#" class="button">Delete</a> -->
         </form>
-        <a href="/admin/event/delete/<%= event.getId() %>" class="button">Delete</a>
+        <a href="/admin/event/delete/<%= event.getId() %>" class="button" onclick="return confirmDelete('<%= event.getId()%>%>')">Delete</a>
+
+        <script>
+            function confirmDelete(eventId) {
+                if (confirm("Do you really want to delete?")) {
+                    window.location.href = "/admin/event/delete/"+eventId;
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        </script>
     </td>
     </tr>
     <%
@@ -448,7 +484,18 @@
                 <input class="button" type="submit" value="Edit">
                 <!-- <a href="#" class="button">Delete</a> -->
             </form>
-            <a href="/admin/course/delete/<%= training.getId() %>" class="button">Delete</a>
+            <a href="/admin/course/delete/<%= training.getId() %>" class="button" onclick="return confirmDelete('<%= training.getId()%>%>')">Delete</a>
+            <script>
+                function confirmDelete(trainingId) {
+                    if (confirm("Do you really want to delete?")) {
+                        window.location.href = "/admin/event/delete/"+trainingId;
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            </script>
         </td>
     </tr>
     <%
