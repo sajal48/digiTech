@@ -275,7 +275,8 @@
     <tr>
         <th>Name</th>
         <th>Service for</th>
-        <th>Active</th>
+        <th>Status</th>
+        <th>Actions</th>
     </tr>
     <!-- Add a row for each user -->
     <%
@@ -286,24 +287,39 @@
         <td><%=details.getService().getName()%></td>
         <td><%=details.getServiceFor().getName()%></td>
         <td><%=details.isAssigned()?"Assigned":"Not Assigned"%></td>
+        <%if(!details.isAssigned()){%>
         <td>
-            <form action="/admin/assign_task" method="post" style="display: inline-block">
+            <form action="/admin/assign_task" method="post" onsubmit="return validateForm()" style="display: inline-block">
                 <input type="hidden" name="detailsId" value="<%= details.getId() %>">
-                <select name="userId" >
-                    <%
-                        List<User> employeeList = ( List<User>) request.getAttribute("employees");
-                        for (User employee : employeeList) {
-
-                    %>
-                    <option value=<%=employee.getId()%> > <%=employee.getName()%></option>
-                    <%
-                        }
-                    %>
+                <select name="userId">
+                    <option value="" selected="selected">Assign to</option>
+                    <% List<User> employeeList = (List<User>) request.getAttribute("employees");
+                        for (User employee : employeeList) { %>
+                    <option value="<%=employee.getId()%>"><%=employee.getName()%></option>
+                    <% } %>
                 </select>
                 <input class="button" type="submit" value="Assign">
                 <!-- <a href="#" class="button">Delete</a> -->
             </form>
+
+            <script>
+                function validateForm() {
+                    var selectBox = document.getElementsByName("userId")[0];
+                    if (selectBox.value == "") {
+                        alert("Please select an employee first.");
+                        return false;
+                    }
+                    return true;
+                }
+            </script>
         </td>
+        <% }
+        else{%>
+        <td>
+            <button class="button" disabled>Ongoing</button>
+        </td>
+        <% }%>
+
     </tr>
     <%
         }
@@ -375,7 +391,7 @@
     <tr>
         <td><%= service.getName() %></td>
 <%--        <td><%= service.getDescription() %></td>--%>
-        <td><%= service.getCost() %></td>
+        <td>$<%= service.getCost() %></td>
         <td>
             <form action="/admin/service/update" method="post" style="display: inline-block">
                 <input type="hidden" name="id" value="<%= service.getId() %>">
@@ -411,8 +427,9 @@
 <table>
     <tr>
         <th>Event Name</th>
-        <th>Date</th>
+        <th>Date (YYYY-MM-DD)</th>
         <th>Location</th>
+        <th>Registration count</th>
         <th>Actions</th>
     </tr>
     <!-- Add a row for each event -->
@@ -424,9 +441,11 @@
     %>
     <tr>
         <td><%= event.getName() %></td>
-        <td><%= event.getDate() %></td>
+        <td><%= event.getDate().toString().substring(0,10) %></td>
         <td><%= event.getLocation() %></td>
+    <td>5</td>
     <td>
+        <a href="#" class="button">Details</a>
         <form action="/admin/event/update" method="post" style="display: inline-block">
             <input type="hidden" name="id" value="<%= event.getId() %>">
             <input type="hidden" name="date" value="<%= event.getDate() %>">
@@ -463,6 +482,7 @@
         <th>Course Name</th>
 <%--        <th>Description</th>--%>
         <th>Cost</th>
+        <th>Enrollment count</th>
         <th>Actions</th>
     </tr>
     <tr>
@@ -474,8 +494,10 @@
     <tr>
         <td><%= training.getName() %></td>
 <%--        <td><%= training.getDescription() %></td>--%>
-        <td><%= training.getCost() %></td>
+        <td>$<%= training.getCost() %></td>
+    <td>10</td>
         <td>
+            <a href="#" class="button">Details</a>
             <form action="/admin/course/update" method="post" style="display: inline-block">
                 <input type="hidden" name="id" value="<%= training.getId() %>">
                 <input type="hidden" name="name" value="<%= training.getName() %>">
