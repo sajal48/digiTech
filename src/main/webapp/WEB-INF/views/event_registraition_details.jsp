@@ -1,4 +1,6 @@
-<%--
+<%@ page import="digitech.dto.CourseDetailsDto" %>
+<%@ page import="digitech.model.User" %>
+<%@ page import="digitech.dto.EventDetailsDto" %><%--
   Created by IntelliJ IDEA.
   User: BJIT
   Date: 2/16/2023
@@ -9,7 +11,7 @@
 <html>
 <head>
     <jsp:include page="header.jsp"/>
-    <title>Registered User list</title>
+    <title>Registered user list</title>
     <style>
         table {
             width: 100%;
@@ -106,7 +108,10 @@
     </style>
 </head>
 <body>
-<h1>Course/Event name</h1>
+<% EventDetailsDto event=(EventDetailsDto) request.getAttribute("eventDetails");
+%>
+<h1>Registered user for <%=event.getEventName()%></h1>
+<h2>Total registered: <%=event.getCustomers().size()%></h2>
 <table>
     <thead>
     <tr>
@@ -115,10 +120,13 @@
     </tr>
     </thead>
     <tbody>
+    <% for(User user:event.getCustomers()){
+    %>
     <tr>
-        <td>Piyal</td>
-        <td>piyal.salamence@gmail.com</td>
+        <td><%=user.getName()%></td>
+        <td><%=user.getEmail()%></td>
     </tr>
+    <%}%>
     </tbody>
 </table>
 </body>

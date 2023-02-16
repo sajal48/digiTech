@@ -1,4 +1,5 @@
-<%--
+<%@ page import="digitech.dto.CourseDetailsDto" %>
+<%@ page import="digitech.model.User" %><%--
   Created by IntelliJ IDEA.
   User: BJIT
   Date: 2/16/2023
@@ -106,7 +107,10 @@
     </style>
 </head>
 <body>
-<h1>Course/Event name</h1>
+<% CourseDetailsDto course=(CourseDetailsDto) request.getAttribute("courseDetails");
+%>
+<h1>Registered user for <%=course.getCourseName()%></h1>
+<h2>Total registered: <%=course.getCustomers().size()%></h2>
 <table>
     <thead>
     <tr>
@@ -115,10 +119,13 @@
     </tr>
     </thead>
     <tbody>
+    <% for(User user:course.getCustomers()){
+    %>
     <tr>
-        <td>Piyal</td>
-        <td>piyal.salamence@gmail.com</td>
+        <td><%=user.getName()%></td>
+        <td><%=user.getEmail()%></td>
     </tr>
+    <%}%>
     </tbody>
 </table>
 </body>

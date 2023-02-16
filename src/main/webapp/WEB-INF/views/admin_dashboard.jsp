@@ -429,7 +429,6 @@
         <th>Event Name</th>
         <th>Date (YYYY-MM-DD)</th>
         <th>Location</th>
-        <th>Registration count</th>
         <th>Actions</th>
     </tr>
     <!-- Add a row for each event -->
@@ -443,9 +442,12 @@
         <td><%= event.getName() %></td>
         <td><%= event.getDate().toString().substring(0,10) %></td>
         <td><%= event.getLocation() %></td>
-    <td>5</td>
     <td>
-        <a href="#" class="button">Details</a>
+        <form action="/event-details" method="post" style="display: inline-block">
+            <input type="hidden" name="eventId" value="<%= event.getId() %>">
+            <input class="button" type="submit" value="Details">
+            <!-- <a href="#" class="button">Delete</a> -->
+        </form>
         <form action="/admin/event/update" method="post" style="display: inline-block">
             <input type="hidden" name="id" value="<%= event.getId() %>">
             <input type="hidden" name="date" value="<%= event.getDate() %>">
@@ -482,7 +484,6 @@
         <th>Course Name</th>
 <%--        <th>Description</th>--%>
         <th>Cost</th>
-        <th>Enrollment count</th>
         <th>Actions</th>
     </tr>
     <tr>
@@ -495,9 +496,12 @@
         <td><%= training.getName() %></td>
 <%--        <td><%= training.getDescription() %></td>--%>
         <td>$<%= training.getCost() %></td>
-    <td>10</td>
         <td>
-            <a href="#" class="button">Details</a>
+            <form action="/course-details" method="post" style="display: inline-block">
+                <input type="hidden" name="courseId" value="<%= training.getId() %>">
+                <input class="button" type="submit" value="Details">
+                <!-- <a href="#" class="button">Delete</a> -->
+            </form>
             <form action="/admin/course/update" method="post" style="display: inline-block">
                 <input type="hidden" name="id" value="<%= training.getId() %>">
                 <input type="hidden" name="name" value="<%= training.getName() %>">

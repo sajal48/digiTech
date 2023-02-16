@@ -247,13 +247,13 @@ public class AdminController {
     public String courseDetails(@RequestParam long courseId,Model model){
         CourseDetailsDto details = adminService.getCourseDetails(courseId);
         model.addAttribute("courseDetails",details);
-        return "";
+        return "course_registraition_details";
     }
 
-    @PostMapping("/course-details")
+    @PostMapping("/event-details")
     public String eventDetails(@RequestParam long eventId,Model model){
         EventDetailsDto details = adminService.getEventDetails(eventId);
         model.addAttribute("eventDetails",details);
-        return "";
+        return "event_registraition_details";
     }
 }

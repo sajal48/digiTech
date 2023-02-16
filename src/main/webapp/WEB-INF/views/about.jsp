@@ -120,7 +120,7 @@
     <p>Our focus is and has always been providing value to our clients using a holistic marketing approach. We specialize in a wide range of marketing channels, including content, SEO, social media boosting, and email marketing, to give you a complete solution for your business growth.</p>
     <p>At Digitech, we understand that every business is unique and requires a tailored approach. That's why we work closely with our clients to understand their needs and goals, and develop a customized plan to help them achieve their desired results.</p>
     <p>Join us on our mission to help businesses grow and succeed in the digital world. Let us take your business to the next level with our expertise and comprehensive approach to marketing.</p>
-    <a class="call-for-reservation" href="#">Call for Reservation</a>
+    <a class="call-for-reservation" onclick="alert('call us at: +60 11-64374797')">Call for Reservation</a>
 </div>
 </body>
 </html>
