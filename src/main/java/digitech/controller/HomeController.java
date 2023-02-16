@@ -58,7 +58,7 @@ public class HomeController {
 
         User user=(User) request.getSession().getAttribute("user");
         if(user!=null){
-            List<ServiceDetails> myServices = new ArrayList<>(userService.getMyServices(user));
+            List<Service> myServices = new ArrayList<>(userService.ownedServices(user.getId()));
             request.getSession().setAttribute("myServices", myServices);
             List<Training> myTraining = new ArrayList<>(user.getMyTrainings());
             request.getSession().setAttribute("myTraining", myTraining);
@@ -118,7 +118,7 @@ public class HomeController {
         if (u != null) {
             User user = adminService.getUser(u.getId());
             request.getSession().setAttribute("user",user);
-            List<ServiceDetails> myServices = new ArrayList<>(userService.getMyServices(user));
+            List<Service> myServices = new ArrayList<>(userService.ownedServices(user.getId()));
             request.getSession().setAttribute("myServices", myServices);
         }
         System.out.println("services");

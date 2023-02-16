@@ -1,9 +1,7 @@
 package digitech.controller;
 
 import digitech.dto.UserDto;
-import digitech.model.ServiceDetails;
-import digitech.model.Training;
-import digitech.model.User;
+import digitech.model.*;
 import digitech.service.AdminService;
 import digitech.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -37,8 +36,11 @@ public class UserController {
 
         List<Training> myTraining = new ArrayList<>(user.getMyTrainings());
         model.addAttribute("myTraining", myTraining);
-        List<ServiceDetails> myServices = new ArrayList<>(userService.getMyServices(user));
+        List<Service> myServices = userService.ownedServices(user.getId());
         model.addAttribute("myServices", myServices);
+
+        List<Event> myEvents = user.getRegisteredAtEvent().stream().collect(Collectors.toList());
+        model.addAttribute("myEvents", myEvents);
         request.getSession().setAttribute("user",user);
 
         return "user_profile";

@@ -187,7 +187,7 @@
             <% } else { %>
             <input type="hidden" name="eventId" value="<%=event.getId()%>">
             <% if(!myEvents.isEmpty() && myEvents.contains(event)) { %>
-            <button type="button" class="buy-event-btn" >Register</button>
+            <button type="button" class="buy-event-btn" >Registered</button>
             <% } else{ %>
             <button type="submit" class="buy-event-btn" onclick="alert('Registered to Event!');">Register</button>
             <% } %>

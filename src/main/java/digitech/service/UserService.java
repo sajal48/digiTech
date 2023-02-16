@@ -5,6 +5,7 @@ import digitech.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +65,16 @@ public class UserService {
                 .build();
         serviceDetailsDao.save(details);
     }
+    public List<digitech.model.Service> ownedServices(long userId){
+        List<ServiceDetails> allServices = serviceDetailsDao.getAll();
+        List<digitech.model.Service> mine = new ArrayList<>();
+        for(ServiceDetails s : allServices){
+            if(s.getServiceFor().getId().equals(userId)){
+                mine.add(s.getService());
+            }
+        }
+        return  mine;
+    }
 
     public void enrollTraining(Long userId, Long trainingId) {
         User user = userDao.get(userId);
@@ -72,9 +83,12 @@ public class UserService {
         userDao.updateUser(user);
     }
 
-    public List<ServiceDetails> getMyServices(User user) {
+    public List<ServiceDetails> getMyServices(long id) {
+        User user = userDao.get(id);
         List<ServiceDetails> serviceDetails = serviceDetailsDao.getAll();
         List<ServiceDetails> myServices = serviceDetails.stream().filter(e -> e.getServiceFor().getId().equals(user.getId())).collect(Collectors.toList());
         return myServices;
     }
+
+
 }

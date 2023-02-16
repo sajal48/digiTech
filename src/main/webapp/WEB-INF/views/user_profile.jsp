@@ -1,7 +1,4 @@
-<%@ page import="digitech.model.User" %>
-<%@ page import="digitech.model.Training" %>
 <%@ page import="java.util.List" %>
-<%@ page import="digitech.model.ServiceDetails" %>
 <!DOCTYPE html>
 <html>
 <%
@@ -9,6 +6,7 @@
 %>
 <head>
     <%@ page import="digitech.model.User" %>
+    <%@ page import="digitech.model.*" %>
     <header>
         <div class="header-container">
             <div class="logo">
@@ -266,13 +264,13 @@
     <th>Service name</th>
   </tr>
       <%
-          List<ServiceDetails> services = (List<ServiceDetails>) request.getAttribute("myServices");
+          List<digitech.model.Service> services = (List<digitech.model.Service>) request.getAttribute("myServices");
 
           if(services!=null){
-              for (ServiceDetails service : services) {
+              for (digitech.model.Service service : services) {
       %>
   <tr>
-    <td><%= service.getService().getName()%></td>
+    <td><%= service.getName()%></td>
 
   </tr>
       <%
@@ -299,6 +297,27 @@
               }
           }
       %>
+</table>
+
+<h2 style="display: inline-block">My Events</h2>
+<table>
+    <tr>
+        <th>Event name</th>
+        <th>Event date</th>
+    </tr>
+    <%
+        List<Event> events = (List<Event>) request.getAttribute("myEvents");
+        if(events!=null){
+            for (Event event : events) {
+    %>
+    <tr>
+        <td><%=event.getName()%></td>
+        <td><%=event.getDate().toString()%></td>
+    </tr>
+    <%
+            }
+        }
+    %>
 </table>
 </body>
 </html>
